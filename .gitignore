@@ -1,0 +1,12 @@
+.classpath
+.project
+.settings/
+bin/
+gen/
+local/          
+local.properties
+release/
+*~
+_MACOSX
+.DS_Store
+._*
