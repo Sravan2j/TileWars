@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,21 +25,24 @@ import android.widget.ViewFlipper;
 import com.tekle.oss.android.animation.AnimationFactory;
 import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 
-
-
-
-
 @SuppressLint({ "ShowToast", "NewApi" })
-public class FirstGame extends Activity implements FlipCompleteListener{
-	private Button startButton;
+public class SecondGame extends Activity implements FlipCompleteListener{
+	private Button nextButton;
 	private Button pauseButton;
 
-	private TextView timerValue;
+	private TextView levelValue;
 
 	private long startTime = 0L;
 
 	private Handler customHandler = new Handler();
 	private Handler flipHandler = new Handler();
+	
+	private Handler swapHandler = new Handler();
+	private Handler gameOverHandler = new Handler();
+
+	int level=0;
+	int swaps = 0;
+	int flipscount=0;
 
 	long timeInMilliseconds = 0L;
 	long timeSwapBuff = 0L;
@@ -46,6 +50,8 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 	int sleepValue = 600;
 	int maxCells=1;
 	int userClick=0;
+	boolean computer=true;
+	boolean gameover=false;
 
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14, R.id.tv15, R.id.tv16,
 			R.id.tv21, R.id.tv22, R.id.tv23, R.id.tv24, R.id.tv25, R.id.tv26,
@@ -61,6 +67,8 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			false, false, false, false, false, false,
 			false, false, false, false, false, false};
 
+	int[] location1 = new int[2];
+	int[] location2 = new int[2];
 
 	final int[] ViewFlipperids = { R.id.vf11, R.id.vf12, R.id.vf13, R.id.vf14, R.id.vf15, R.id.vf16,
 			R.id.vf21, R.id.vf22, R.id.vf23, R.id.vf24, R.id.vf25,R.id.vf26,
@@ -77,8 +85,11 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			R.id.tvb61, R.id.tvb62, R.id.tvb63, R.id.tvb64, R.id.tvb65, R.id.tvb66};
 
 
-
+	int remaining = 0;
 	int count=0;
+	int swaps1=0;
+	int swaps2=0;
+	Random rand = new Random();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,7 +101,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		}
 		else
 		{
-			setContentView(R.layout.activity_main);
+			setContentView(R.layout.second_screen);
 		}
 
 		/*final ViewFlipper vf11 = (ViewFlipper)findViewById(R.id.vf11);
@@ -142,44 +153,38 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 
 
-		/*		for (int i = 0; i < 36; i++) {
+		for (int i = 0; i < 36; i++) {
 			final int choiceIndex = i;
 			findViewById(TextViewids[i]).setOnClickListener( new View.OnClickListener() {
 				public void onClick(View v) {
-
-					((TextView)findViewById(TextViewids[1])).setText("G");		
-					//Toast.makeText(this, ((TextView)findViewById(TextViewids[1])).getWidth()+"", Toast.LENGTH_SHORT).show();
-					Float size= (float) ((((TextView)findViewById(TextViewids[1])).getWidth()) * 0.75);
-					((TextView)findViewById(TextViewids[1])).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
+					if(isFlipped[choiceIndex])
+					{
+						((TextView)findViewById(TextViewbids[choiceIndex])).setBackgroundColor(Color.GREEN);
+						remaining--;
+						flipscount--;
+					}
+					else
+					{						
+						((TextView)findViewById(TextViewbids[choiceIndex])).setBackgroundColor(Color.RED);
+						gameover=true;
+						isFlipped[choiceIndex]=true;
+						//gameOver();
+					}
 					AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[choiceIndex]), FlipDirection.LEFT_RIGHT);
-					int[] location = new int[2];
-					((TextView)findViewById(TextViewids[choiceIndex])).getLocationInWindow(location);
-					//Toast.makeText(FirstGame.this, ((TextView)findViewById(TextViewids[1])).getWidth()+"", Toast.LENGTH_SHORT).show();
-					//Toast.makeText(MainActivity.this, location[0]+""+location[1] +"", Toast.LENGTH_SHORT).show();
-					//Toast.makeText(FirstGame.this, ((TextView)findViewById(TextViewids[choiceIndex])).getX()+"", Toast.LENGTH_SHORT).show();
-					Animation animation = new TranslateAnimation(0,-location[0], 0,-location[1]);
-					animation.setDuration(1000);
+					if(remaining==0)
+					{						
 
-					animation.setZAdjustment(Animation.ZORDER_TOP);
-					animation.setFillAfter(true);
-					((TextView)findViewById(TextViewids[choiceIndex])).startAnimation(animation);
-
-					ObjectAnimator transAnimation= ObjectAnimator.ofFloat((TextView)findViewById(TextViewids[choiceIndex]), "translationX", 0, -100);
-
-					transAnimation.setDuration(3000);//set duration
-
-
-					//findViewById(TextViewids[choiceIndex]).animate().x(-location[0]).y(-location[1]).setDuration(2000);
-					transAnimation.start();//start animation
-
-					PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat("x", -location[0]-2);
-					PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat("y", -location[1]-2);
-					ObjectAnimator.ofPropertyValuesHolder(findViewById(TextViewids[choiceIndex]), pvhX, pvhY).setDuration(2000).start();
-
+						/*for(int j=0;j<36;j++){										
+							if(isFlipped[j]) 			
+								AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[j]), FlipDirection.LEFT_RIGHT);			
+						}
+						level++;
+						levelValue.setText("Level : "+level);*/
+					}
 
 				}
 			});
-			 			findViewById(TextViewbids[i]).setOnClickListener( new View.OnClickListener() {
+			/*		 			findViewById(TextViewbids[i]).setOnClickListener( new View.OnClickListener() {
 				 public void onClick(View v) {
 					 Log.i("choiceIndex", choiceIndex+"");
 					 AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[choiceIndex]), FlipDirection.LEFT_RIGHT);					
@@ -191,10 +196,13 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 				 }
 			 });
-		}*/
+			 */		}
 
 
 
+		for(int i=0;i<36;i++){			
+			findViewById(TextViewids[i]).setClickable(false);					
+		}
 		/*Button okButton = (Button) findViewById(R.id.okButton);
 
 		okButton.setOnClickListener(new View.OnClickListener() {
@@ -222,22 +230,25 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 			}
 		});
-*/
+		 */
 
 
-		timerValue = (TextView) findViewById(R.id.timerValue);
-		startButton = (Button) findViewById(R.id.startButton);
+		levelValue = (TextView) findViewById(R.id.levelValue);
+		levelValue.setText("Level : "+level);
+		nextButton = (Button) findViewById(R.id.nextButton);
 		pauseButton = (Button) findViewById(R.id.pauseButton);
 
-		pauseButton.setOnClickListener(new View.OnClickListener() {
+		nextButton.setOnClickListener(new View.OnClickListener() {
 
 
 			public void onClick(View view) {
-				//new FlipTask().execute();
-				startTime = SystemClock.uptimeMillis();
-				customHandler.postDelayed(updateTimerThread, 0);
-				resetGame();
-				flipHandler.postDelayed(flipRun, sleepValue);
+				for (int i = 0; i < 36; i++) {		
+					isFlipped[i]=false;
+				}
+				//levelValue.setText("Level : "+level);
+				Flip();
+				//resetGame();
+				//flipHandler.postDelayed(flipRun, sleepValue);
 
 			}
 
@@ -245,7 +256,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 
 
-		startButton.setOnClickListener(new View.OnClickListener() {
+		pauseButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {
 
@@ -259,45 +270,197 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 
 
+	public void Flip() {
+		computer = true;		
+		int i=0;
+		for(i=0;i<36;i++){			
+			findViewById(TextViewids[i]).setClickable(false);					
+		}
+
+		int random=0;		
+
+
+		int flips = level+1;
+		if (flips>36) flips =36; //fix
+		swaps = level-1;
+		flipscount = flips;
+		remaining = flips;
+
+		while(flips>0){
+			flips--;			
+			random=rand.nextInt(36);
+			while(isFlipped[random]) {random=rand.nextInt(36);} 
+			isFlipped[random]=true;
+			((TextView)findViewById(TextViewbids[random])).setBackgroundColor(Color.GREEN);
+			AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[random]), FlipDirection.LEFT_RIGHT);			
+		}
+
+		/*try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(i=0;i<36;i++){						
+			if(isFlipped[i]) 			
+				AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[i]), FlipDirection.LEFT_RIGHT);			
+		}
+		if(swaps>0)
+		{
+			swapAnimation();
+		}
+		if (sleepValue>50) sleepValue-=5;
+		if (count<10)
+			flipHandler.postDelayed(flipRun, sleepValue);
+		else gameOver();
+
+		for(i=0;i<36;i++){			
+			findViewById(TextViewids[i]).setClickable(true);					
+		}
+		 */
+	}
+
+
+
 	Runnable flipRun = new Runnable() {
 		@Override
 		public void run() {
-			boolean flag=true;
-			Random rand = new Random();
-			int random=0;
-			int cells = rand.nextInt(maxCells)+1;
-			Log.i("cells",cells+"");
-			while(cells>0){
-				cells--;
-				/*try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
-				random=rand.nextInt(36);
-				while(isFlipped[random]) {random=rand.nextInt(36);} 
-				update(random,1);
-				AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[random]), FlipDirection.LEFT_RIGHT);
-				if (count==10) gameOver();
-				//count++;
-				
-				//if (count==10)
-				//flag=false;
+
+			if(computer){
 
 
-			}
-			if (sleepValue>50) sleepValue-=5;
+				Log.i("Entered Run","Entered Run");
+				int i=0;
+				for(i=0;i<36;i++){						
+					if(isFlipped[i]) 			
+						AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[i]), FlipDirection.LEFT_RIGHT);			
+				}
+				if(swaps>0)
+				{
+					//swapAnimation();
+					swapHandler.postDelayed(swapRun, 1000);
+				}
+				else
+				{
+					for(i=0;i<36;i++){			
+						findViewById(TextViewids[i]).setClickable(true);					
+					}
+					computer = false;			
+					flipscount = level+1;
+					if (flipscount>36) flipscount =36; //fix
+
+				}
+				/*if (sleepValue>50) sleepValue-=5;
 			if (count<10)
 				flipHandler.postDelayed(flipRun, sleepValue);
-			else gameOver();
+			else gameOver();*/
+
+				
+			}
+			else if(!computer) 
+			{
+
+				for(int j=0;j<36;j++){										
+					if(isFlipped[j]) 			
+						AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[j]), FlipDirection.LEFT_RIGHT);			
+				}
+				level++;
+				levelValue.setText("Level : "+level);
+				for(int i=0;i<36;i++){			
+					findViewById(TextViewids[i]).setClickable(false);					
+				}
+			}
 
 		}
 	};
 
 
+	Runnable swapRun = new Runnable() {
+		@Override
+		public void run() {
+			swapAnimation();
+			
+		}
+	};
+	
+	Runnable gameOverRun = new Runnable() {
+		@Override
+		public void run() {
+			gameOver();
+			
+		}
+	};	
+	
+
+	public void swapAnimation(){
+
+		swaps1=rand.nextInt(36);
+		swaps2=rand.nextInt(36);
+		while(swaps1==swaps2) {swaps2=rand.nextInt(36);}
+
+		((TextView)findViewById(TextViewids[swaps1])).getLocationInWindow(location1);
+
+		((TextView)findViewById(TextViewids[swaps2])).getLocationInWindow(location2);
+
+		Animation animation1 = new TranslateAnimation(0,location1[0]-location2[0], 0,location1[1]-location2[1]);
+		animation1.setDuration(500);
+		animation1.setZAdjustment(Animation.ZORDER_TOP);
+		((TextView)findViewById(TextViewids[swaps2])).startAnimation(animation1);
+
+		Animation animation2 = new TranslateAnimation(0,-location1[0]+location2[0], 0,-location1[1]+location2[1]);
+		animation2.setDuration(500);
+		animation2.setZAdjustment(Animation.ZORDER_BOTTOM);
+
+		animation2.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+
+
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				// TODO Auto-generated method stub
+				swaps--;
+				boolean extra=isFlipped[swaps1];
+				isFlipped[swaps1]=isFlipped[swaps2];
+				isFlipped[swaps2]=extra;
+				if(swaps>0)
+				{
+					swapAnimation();
+				}
+				else if (swaps==0){
+					Log.i("swap ended","swap ended");
+					for(int i=0;i<36;i++){			
+						findViewById(TextViewids[i]).setClickable(true);					
+					}
+
+					computer = false;			
+					flipscount = level+1;
+					if (flipscount>36) flipscount =36; //fix
+				}
+
+			}
+		});
+
+
+		((TextView)findViewById(TextViewids[swaps1])).startAnimation(animation2);
+
+
+
+
+	}
 	public void resetGame()
 	{
+		level=0;
+
 		maxCells = 1;
 		userClick = 0;
 		sleepValue = 600;
@@ -331,7 +494,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 					//count--;
 					userClick++;
 					if(userClick==50) {maxCells++; userClick=0;}
-					
+
 				}
 			});
 			i++;
@@ -341,7 +504,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 	{
 		isFlipped[index] = !isFlipped[index];
 		count+=num;
-		
+
 	}
 
 
@@ -357,7 +520,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			int mins = secs / 60;
 			secs = secs % 60;
 			int milliseconds = (int) (updatedTime % 1000);
-			timerValue.setText("" + mins + ":"
+			levelValue.setText("" + mins + ":"
 					+ String.format("%02d", secs) + ":"
 					+ String.format("%03d", milliseconds));
 			customHandler.postDelayed(this, 0);
@@ -378,6 +541,34 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 	@Override
 	public void flipOutComplete() {
+
+		if (gameover==true) 
+			{gameOverHandler.postDelayed(gameOverRun, 600);			
+			}
+		if(computer){
+			flipscount--;
+		}
+		Log.i("flipscount",flipscount+":"+computer);
+		if(flipscount==0){
+			flipscount--;
+			flipHandler.postDelayed(flipRun, 1000);
+			/*if(computer){
+
+				Log.i("postDelayed","postDelayed");
+				flipHandler.postDelayed(flipRun, 1000);
+
+			}
+			else if(!computer) 
+			{
+
+				for(int j=0;j<36;j++){										
+					if(isFlipped[j]) 			
+						AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[j]), FlipDirection.LEFT_RIGHT);			
+				}
+				level++;
+				levelValue.setText("Level : "+level);
+			}*/
+		}
 		// TODO Auto-generated method stub
 
 		/*		int[] location = new int[2];
@@ -408,10 +599,9 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 	public void gameOver() {
 
-		timeSwapBuff += timeInMilliseconds;
-		customHandler.removeCallbacks(updateTimerThread);
-		for (int i = 0; i < 36; i++) {		
-			findViewById(TextViewbids[i]).setOnClickListener(null);
+		for (int i = 0; i < 36; i++) {
+			findViewById(TextViewids[i]).setClickable(false);
+			//findViewById(TextViewids[i]).setOnClickListener(null);
 		}
 
 		Float size= (float) ((((TextView)findViewById(TextViewids[1])).getWidth()) * 0.75);

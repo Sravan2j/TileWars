@@ -29,7 +29,7 @@ import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 
 
 @SuppressLint({ "ShowToast", "NewApi" })
-public class FirstGame extends Activity implements FlipCompleteListener{
+public class ThirdGame extends Activity implements FlipCompleteListener{
 	private Button startButton;
 	private Button pauseButton;
 

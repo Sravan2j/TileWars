@@ -976,13 +976,6 @@
             android:layout_weight="0.5"
             android:text="@string/pauseButtonLabel" />
         
-        <Button
-            android:id="@+id/okButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Ok" />
-        
 
     </LinearLayout> 
     </LinearLayout>
