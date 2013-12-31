@@ -9,5 +9,7 @@
     <string name="pauseButtonLabel">Pause</string>
     <string name="startButtonLabel">Start</string>
     <string name="nextButtonLabel">Next</string>
+    <string name="blueVal">Blue Count : </string>
+    <string name="redVal">Red Count : </string>
 
 </resources>
