@@ -281,6 +281,13 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 							if (chances == 0) {
 								chances = 2;
 								player = player * -1;
+								if (player == 1) {
+									redValue.setTextColor(Color.RED);	
+									blueValue.setTextColor(Color.GRAY);
+								} else if (player == -1) {
+									blueValue.setTextColor(Color.BLUE);
+									redValue.setTextColor(Color.GRAY);
+								}
 							}
 
 							if (remaining == 0) {
@@ -351,6 +358,8 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 
 		blueValue = (TextView) findViewById(R.id.blueValue);
 		blueValue.setText("Blue Count : " + blueCount);
+		blueValue.setTextColor(Color.BLUE);
+		redValue.setTextColor(Color.GRAY);
 		nextButton = (Button) findViewById(R.id.nextButton);
 		pauseButton = (Button) findViewById(R.id.pauseButton);
 

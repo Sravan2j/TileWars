@@ -90,7 +90,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		}
 		else
 		{
-			setContentView(R.layout.activity_main);
+			setContentView(R.layout.first_screen);
 		}
 
 		/*final ViewFlipper vf11 = (ViewFlipper)findViewById(R.id.vf11);
