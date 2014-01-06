@@ -11,5 +11,6 @@
     <string name="nextButtonLabel">Next</string>
     <string name="blueVal">Blue Count : </string>
     <string name="redVal">Red Count : </string>
+    <string name="title_activity_fourth_game">FourthGame</string>
 
 </resources>

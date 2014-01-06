@@ -1,135 +1,236 @@
-<com.example.tilewars.DemoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/entireLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:background="@android:color/white"    
-    android:orientation="vertical" >
+    android:background="@android:color/white" >
 
-    <LinearLayout
-        android:id="@+id/frm_linear_00"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_gravity="center_horizontal"
-        android:animateLayoutChanges="true"
-        android:padding="5dp"
-        android:visibility="gone" >
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:stretchColumns="1" >
 
-        <View
-            android:id="@+id/l0b1"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
-        <View
-            android:id="@+id/l0b2"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
+            <TextView
+                android:id="@+id/gameid"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"                
+                android:gravity="center_horizontal"
+                android:text="Select Game"
+                android:typeface="serif"
+                android:textStyle="bold|italic"
+                android:textSize="20sp"
+                android:textColor="#001082" >
+            </TextView>
+        </TableRow>
+    </TableLayout>
 
-        <View
-            android:id="@+id/l0b3"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
-    </LinearLayout>
+    <com.example.tilewars.DemoLinearLayout
+        android:id="@+id/demoLinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tableLayout1"
+         
+        android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/frm_linear_01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:animateLayoutChanges="true"
-        android:baselineAligned="false"
-        android:gravity="bottom"
-        android:padding="5dp" >
+        <LinearLayout
+            android:id="@+id/frm_linear_00"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:animateLayoutChanges="true"
+            android:layout_gravity="center_horizontal"            
+            android:padding="5dp"
+            android:visibility="gone" >
 
-        <View
-            android:id="@+id/l1b1"
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:visibility="gone" />
+            <View
+                android:id="@+id/l0b1"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
 
-        <View
-            android:id="@+id/l1b1e"
-            android:layout_width="180dp"
-            android:layout_height="60dp"
-            android:visibility="gone" />
-   
-        <Button
-            android:id="@+id/l1b2"
+            <View
+                android:id="@+id/l0b2"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+            <View
+                android:id="@+id/l0b3"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/frm_linear_01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#C40401"
-            android:minHeight="60dp"
-            android:minWidth="60dp" />
+            android:layout_gravity="center_horizontal"
+            android:animateLayoutChanges="true"
+            android:baselineAligned="false"
+            android:gravity="bottom"
+            android:padding="5dp" >
 
-        <View
-            android:layout_width="10dp"
-            android:layout_height="60dp"
-            android:visibility="visible" />
+            <View
+                android:id="@+id/l1b1"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:visibility="gone" />
 
-        <Button
-            android:id="@+id/l1b3"
+            <View
+                android:id="@+id/l1b1e"
+                android:layout_width="180dp"
+                android:layout_height="60dp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/l1b2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#C40401"
+                android:minHeight="60dp"
+                android:minWidth="60dp" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="60dp"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/l1b3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0101B0"
+                android:minHeight="60dp"
+                android:minWidth="60dp" />
+
+            <View
+                android:id="@+id/l1b4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/frm_linear_02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#0101B0"
-            android:minHeight="60dp"
-            android:minWidth="60dp" />
+            android:layout_gravity="center_horizontal"
+            android:animateLayoutChanges="true"
+            android:baselineAligned="false"
+            android:gravity="top"
+            android:padding="5dp" >
 
-        <View
-            android:id="@+id/l1b4"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:visibility="gone" />
-    </LinearLayout>
+            <View
+                android:id="@+id/l2b1"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:visibility="gone" />
 
-    <LinearLayout
-        android:id="@+id/frm_linear_02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:animateLayoutChanges="true"
-        android:baselineAligned="false"
-        android:gravity="top"
-        android:padding="5dp" >
+            <View
+                android:id="@+id/l2b1e"
+                android:layout_width="180dp"
+                android:layout_height="60dp"
+                android:visibility="gone" />
 
-        <View
-            android:id="@+id/l2b1"
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:visibility="gone" />
+            <Button
+                android:id="@+id/l2b2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFEE22"
+                android:minHeight="60dp"
+                android:minWidth="60dp" />
 
-        <View
-            android:id="@+id/l2b1e"
-            android:layout_width="180dp"
-            android:layout_height="60dp"
-            android:visibility="gone" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="60dp"
+                android:visibility="visible" />
 
-        <Button
-            android:id="@+id/l2b2"
+            <Button
+                android:id="@+id/l2b3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00DE17"
+                android:minHeight="60dp"
+                android:minWidth="60dp" />
+
+            <View
+                android:id="@+id/l2b4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/frm_linear_03"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_gravity="center_horizontal"     
+            android:animateLayoutChanges="true"       
+            android:padding="5dp"
+            android:visibility="gone" >
+
+            <View
+                android:id="@+id/l3b1"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+            <View
+                android:id="@+id/l3b2"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+            <View
+                android:id="@+id/l3b3"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+        </LinearLayout>
+        
+    </com.example.tilewars.DemoLinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:stretchColumns="1" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#FFEE22"
-            android:minHeight="60dp"
-            android:minWidth="60dp" />
+             >
 
-        <View
-            android:layout_width="10dp"
-            android:layout_height="60dp"
-            android:visibility="visible" />
+            <TextView
+                android:id="@+id/play"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                	
+                android:drawableTop="@drawable/playbg"
+                android:gravity="center_horizontal"
+                android:textColor="#001082"
+                android:clickable="true"
+                android:text="Play" >
+            </TextView>
 
-        <Button
-            android:id="@+id/l2b3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00DE17"
-            android:minHeight="60dp"
-            android:minWidth="60dp" />
+            <TextView
+                android:id="@+id/games"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/gearbg"                
+                android:gravity="center_horizontal"
+                android:textColor="#001082"
+                android:clickable="true"
+                android:text="Games" >
+            </TextView>
+        </TableRow>
+    </TableLayout>
 
-        <View
-            android:id="@+id/l2b4"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:visibility="gone" />
-    </LinearLayout>
-
-</com.example.tilewars.DemoLinearLayout>
+</RelativeLayout>

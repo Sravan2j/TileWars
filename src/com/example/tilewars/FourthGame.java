@@ -27,7 +27,7 @@ import com.tekle.oss.android.animation.AnimationFactory;
 import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 
 @SuppressLint({ "ShowToast", "NewApi" })
-public class ThirdGame extends Activity implements FlipCompleteListener {
+public class FourthGame extends Activity implements FlipCompleteListener {
 	private Button nextButton;
 	private Button pauseButton;
 
@@ -43,11 +43,13 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 	private Handler swapHandler = new Handler();
 	private Handler gameOverHandler = new Handler();
 
+	int currentIndex = 0;
 	int cnt = 0;
 	int oppCnt = 0;
+	int chainCnt = 0;
 	int redCount = 0;
 	int blueCount = 0;
-	int chances = 2;
+	int chances = 1;
 	int player = -1;
 	int otherPlayer = 1;
 	int tileColor = 0;
@@ -128,7 +130,7 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		if (android.os.Build.VERSION.SDK_INT <= 10) {
 			setContentView(R.layout.apilt11_main);
 		} else {
-			setContentView(R.layout.third_screen);
+			setContentView(R.layout.fourth_screen);
 		}
 
 		/*
@@ -186,9 +188,14 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 			findViewById(TextViewids[i]).setOnClickListener(
 					new View.OnClickListener() {
 						public void onClick(View v) {
-
+							
+							for (int k = 0; k < 36; k++) {
+								((TextView) findViewById(TextViewids[k]))
+								.setClickable(false);
+							}
 							cnt = 0;
 							oppCnt=0;
+							chainCnt = 0;
 							if (player == 1) {
 								tileColor = Color.RED;
 							} else if (player == -1) {
@@ -283,7 +290,21 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 							}
 							redValue.setText("Red Count : " + redCount);
 							blueValue.setText("Blue Count : " + blueCount);
-							switchHandler.postDelayed(switchRun, 200);
+
+							chainCnt = cnt-3;
+							if (chainCnt>0)
+							{
+								currentIndex=choiceIndex;
+								swapHandler.postDelayed(swapRun, 1000);
+								
+								
+								//chainReaction(choiceIndex);
+							}
+							else
+							{
+								switchHandler.postDelayed(switchRun, 200);			
+							}
+							
 							/*chances--;
 							if (chances == 0) {
 								chances = 2;
@@ -382,7 +403,6 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 				// flipHandler.postDelayed(flipRun, sleepValue);
 
 			}
-
 		});
 
 		pauseButton.setOnClickListener(new View.OnClickListener() {
@@ -396,6 +416,122 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		});
 
 	}
+
+
+	public void chainReaction(int choiceIndex){
+
+		chainCnt--;
+		cnt = 0;
+		oppCnt=0;
+		if (player == 1) {
+			tileColor = Color.RED;
+		} else if (player == -1) {
+			tileColor = Color.BLUE;
+		}
+
+		if (isFlipped[choiceIndex]) {
+			((TextView) findViewById(TextViewids[choiceIndex]))
+			.setBackgroundColor(tileColor);
+			((TextView) findViewById(TextViewids[choiceIndex]))
+			.setClickable(false);
+		} else {
+			((TextView) findViewById(TextViewbids[choiceIndex]))
+			.setBackgroundColor(tileColor);
+			((TextView) findViewById(TextViewbids[choiceIndex]))
+			.setClickable(false);
+		}
+		AnimationFactory
+		.flipTransition(
+				(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
+				FlipDirection.LEFT_RIGHT);
+
+		isFlipped[choiceIndex] = !isFlipped[choiceIndex];
+		cardColor[choiceIndex] = player;
+		//cnt++;
+
+		otherPlayer = player * -1;
+
+		neighbour4 = choiceIndex - 1;
+		if (choiceIndex % 6 != 0) {
+			if (cardColor[neighbour4] == otherPlayer) {
+				FlipTiles(neighbour4);
+			}
+			neighbour1 = neighbour4 - 6;
+			if (neighbour1 > -1
+					&& cardColor[neighbour1] == otherPlayer) {
+
+				FlipTiles(neighbour1);
+			}
+			neighbour6 = neighbour4 + 6;
+			if (neighbour6 < 36
+					&& cardColor[neighbour6] == otherPlayer) {
+
+				FlipTiles(neighbour6);
+			}
+
+		}
+
+		neighbour5 = choiceIndex + 1;
+		if (neighbour5 % 6 != 0) {
+			if (cardColor[neighbour5] == otherPlayer) {
+
+				FlipTiles(neighbour5);
+			}
+
+			neighbour3 = neighbour5 - 6;
+
+			if (neighbour3 > -1
+					&& cardColor[neighbour3] == otherPlayer) {
+
+				FlipTiles(neighbour3);
+			}
+			neighbour8 = neighbour5 + 6;
+			if (neighbour8 < 36
+					&& cardColor[neighbour8] == otherPlayer) {
+
+				FlipTiles(neighbour8);
+			}
+		}
+
+		neighbour2 = choiceIndex - 6;
+		if (neighbour2 > -1
+				&& cardColor[neighbour2] == otherPlayer) {
+
+			FlipTiles(neighbour2);
+		}
+		neighbour7 = choiceIndex + 6;
+		if (neighbour7 < 36
+				&& cardColor[neighbour7] == otherPlayer) {
+
+			FlipTiles(neighbour7);
+		}
+
+		if (player == 1) {
+			redCount += cnt;
+			blueCount +=oppCnt;
+
+		} else if (player == -1) {
+			blueCount += cnt;
+			redCount +=oppCnt;
+
+		}
+		redValue.setText("Red Count : " + redCount);
+		blueValue.setText("Blue Count : " + blueCount);
+
+		if (chainCnt>0)
+		{
+			currentIndex=choiceIndex;
+			swapHandler.postDelayed(swapRun, 1000);
+			//chainReaction(choiceIndex);
+		}
+		else
+		{
+			switchHandler.postDelayed(switchRun, 200);			
+		}
+
+
+	}
+
 
 	public void FlipTiles(int index) {
 		if (isFlipped[index]) {
@@ -416,26 +552,6 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		oppCnt--;
 
 	}
-	
-	
-	Runnable switchRun = new Runnable() {
-		@Override
-		public void run() {								
-			chances--;
-			if (chances == 0) {
-				chances = 2;
-				player = player * -1;
-				if (player == 1) {
-					redValue.setTextColor(Color.RED);	
-					blueValue.setTextColor(Color.GRAY);
-				} else if (player == -1) {
-					blueValue.setTextColor(Color.BLUE);
-					redValue.setTextColor(Color.GRAY);
-				}
-			}
-
-		}
-	};
 
 	public void Flip() {
 		computer = true;
@@ -536,9 +652,43 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		public void run() {
 			swapAnimation();
 
+
+
+
+
+
+
 		}
 	};
 
+	
+	Runnable switchRun = new Runnable() {
+		@Override
+		public void run() {
+			
+			for (int k = 0; k < 36; k++) {
+				if(cardColor[k]==0){
+				((TextView) findViewById(TextViewids[k]))
+				.setClickable(true);
+				}
+			}
+			
+			chances--;
+			if (chances == 0) {
+				chances = 1;
+				player = player * -1;
+				if (player == 1) {
+					redValue.setTextColor(Color.RED);	
+					blueValue.setTextColor(Color.GRAY);
+				} else if (player == -1) {
+					blueValue.setTextColor(Color.BLUE);
+					redValue.setTextColor(Color.GRAY);
+				}
+			}
+
+		}
+	};
+	
 	Runnable gameOverRun = new Runnable() {
 		@Override
 		public void run() {
@@ -548,24 +698,42 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 	};
 
 	public void swapAnimation() {
-
-		swaps1 = rand.nextInt(36);
+		swaps1=currentIndex;		
 		swaps2 = rand.nextInt(36);
-		while (swaps1 == swaps2) {
+		while (swaps1 == swaps2 || cardColor[swaps2]!=player) {
 			swaps2 = rand.nextInt(36);
 		}
 
-		((TextView) findViewById(TextViewids[swaps1]))
+		int tidSwap1=-1;
+		if(isFlipped[swaps1])
+		{		
+			tidSwap1=TextViewbids[swaps1];
+		}
+		else{
+			tidSwap1=TextViewids[swaps1];
+		}
+
+		int tidSwap2=-1;
+		if(isFlipped[swaps2])
+		{		
+			tidSwap2=TextViewbids[swaps2];
+		}
+		else{
+			tidSwap2=TextViewids[swaps2];
+		}
+
+
+		((TextView) findViewById(tidSwap1))
 		.getLocationInWindow(location1);
 
-		((TextView) findViewById(TextViewids[swaps2]))
+		((TextView) findViewById(tidSwap2))
 		.getLocationInWindow(location2);
 
 		Animation animation1 = new TranslateAnimation(0, location1[0]
 				- location2[0], 0, location1[1] - location2[1]);
 		animation1.setDuration(500);
 		animation1.setZAdjustment(Animation.ZORDER_TOP);
-		((TextView) findViewById(TextViewids[swaps2]))
+		((TextView) findViewById(tidSwap2))
 		.startAnimation(animation1);
 
 		Animation animation2 = new TranslateAnimation(0, -location1[0]
@@ -588,29 +756,13 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				// TODO Auto-generated method stub
-				swaps--;
-				boolean extra = isFlipped[swaps1];
-				isFlipped[swaps1] = isFlipped[swaps2];
-				isFlipped[swaps2] = extra;
-				if (swaps > 0) {
-					swapAnimation();
-				} else if (swaps == 0) {
-					Log.i("swap ended", "swap ended");
-					for (int i = 0; i < 36; i++) {
-						findViewById(TextViewids[i]).setClickable(true);
-					}
-
-					computer = false;
-					flipscount = level + 1;
-					if (flipscount > 36)
-						flipscount = 36; // fix
-				}
+				// TODO Auto-generated method stub				
+				chainReaction(swaps2);
 
 			}
 		});
 
-		((TextView) findViewById(TextViewids[swaps1]))
+		((TextView) findViewById(tidSwap1))
 		.startAnimation(animation2);
 
 	}
