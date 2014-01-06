@@ -12,7 +12,9 @@
     <string name="pauseButtonLabel">Pause</string>
     <string name="startButtonLabel">Start</string>
     <string name="nextButtonLabel">Next</string>
-    <string name="resetButtonLabel">Reset</string>    
+    <string name="resetButtonLabel">Reset</string>
     <string name="title_activity_fourth_game">FourthGame</string>
+    <string name="about_screen_credits">"\nDeveloper: Sravan Kumar Reddy Javaji\nEmail: sravan2j@gmail.com\n\nTileWars is a tile flipping game with four modes.\n1) SpeedTile: Tiles are flipped over at an increasing rate and you have to tap them back before ten are flipped.\n2) MemoryTile: Remember where the tiles were shown and tap them all to advance to the next round. Don't be fooled when the tiles start swapping positions.\n3) FlipTile: Two players take turns flipping two tiles per turn. You can flip any grey tile to your color and doing so flips all bordering tiles to your color. The objective is to have the most tiles of your color by the end of the game.\n4) ChainTile: Like FlipTile players take turns flipping tiles and try to get the most of their color at the end. However, each player gets one flip per turn and when more than 2 boundary tiles are flipped then it activates a chain reaction. Your tile swaps with other tiles of your color and it flips adjacent tiles to your color, again it swaps, and flips adjacent to your color. The number of times it swaps and flips depends on your score in the current turn."</string>
+    <string name="versionName">2013-12-15 10:53</string>
 
 </resources>

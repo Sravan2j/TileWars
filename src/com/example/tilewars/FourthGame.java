@@ -4,6 +4,8 @@ import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 public class FourthGame extends Activity implements FlipCompleteListener {
 	private TextView resetButton;
 
+	private TextView rulesButton;	
 	private TextView redValue;
 	private TextView blueValue;
 
@@ -278,6 +281,24 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 				blueValue.setText("Blue Score : " + blueCount);								
 				resetButton.setClickable(true);			
 			}
+		});
+
+		rulesButton = (TextView) findViewById(R.id.rulesButton);
+
+		rulesButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(FourthGame.this);
+				builder.setMessage("Play against a friend! A good flip activates a chain reaction as bonus points.")
+				.setTitle("Chain Tile Rules");
+				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			               // User clicked OK button
+			        	   dialog.dismiss();
+			           }
+			       });				
+				builder.show();
+			}
+
 		});
 
 

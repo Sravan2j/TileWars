@@ -4,6 +4,8 @@ import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -22,7 +24,7 @@ import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 @SuppressLint({ "ShowToast", "NewApi" })
 public class ThirdGame extends Activity implements FlipCompleteListener {
 	private TextView resetButton;
-	//private TextView pauseButton;
+	private TextView rulesButton;
 
 	private TextView redValue;
 	private TextView blueValue;
@@ -254,8 +256,23 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		blueValue.setTextColor(Color.BLUE);
 		redValue.setTextColor(Color.GRAY);
 		resetButton = (TextView) findViewById(R.id.resetButton);
-		//pauseButton = (TextView) findViewById(R.id.pauseButton);
+		rulesButton = (TextView) findViewById(R.id.rulesButton);
+		rulesButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(ThirdGame.this);
+				builder.setMessage("Play against a friend! Take two turns each and try to get the most tiles.")
+				.setTitle("Flip Tile Rules");
+				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			               // User clicked OK button
+			        	   dialog.dismiss();
+			           }
+			       });				
+				builder.show();
+			}
 
+		});
+		
 		resetButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {

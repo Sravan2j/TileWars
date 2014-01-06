@@ -1,5 +1,6 @@
 package com.example.tilewars;
 
+
 import android.animation.Animator;
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,6 +21,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "demo.layout.transition.MainActivity";
+	private static final int ABOUT_MENUOPTION_ID = Menu.FIRST + 11;
 	private View viewvar= null;
 	LinearLayout frm_linear_00 = null;
 	TextView t1 = null;
@@ -225,5 +229,27 @@ public class MainActivity extends Activity implements OnClickListener {
 			gameId.setText("Game "+Gameid);
 		}
 	};
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, ABOUT_MENUOPTION_ID, 0,"About").setIcon(R.drawable.about);
+		return true;
+
+	}
+	/** Menu Item Click Listener*/
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+
+		case ABOUT_MENUOPTION_ID:
+			DialogPrompt.showAppAboutDialog(this);
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+
+	}
 
 }

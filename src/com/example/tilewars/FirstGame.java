@@ -5,6 +5,8 @@ import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -33,7 +35,7 @@ import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 @SuppressLint({ "ShowToast", "NewApi" })
 public class FirstGame extends Activity implements FlipCompleteListener{
 	private TextView startButton;
-	private TextView pauseButton;
+	private TextView rulesButton;
 
 	private TextView timerValue;
 	private TextView maxTimerTV;
@@ -101,13 +103,13 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		if (android.os.Build.VERSION.SDK_INT <= 10) {
+		/*if (android.os.Build.VERSION.SDK_INT <= 10) {
 			setContentView(R.layout.apilt11_main);
 		}
 		else
-		{
+		{*/
 			setContentView(R.layout.first_screen);
-		}
+		//}
 
 		loadSavedPreferences();
 
@@ -147,8 +149,24 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		maxTimerTV.setText(maxTimeValue);
 
 		startButton = (TextView) findViewById(R.id.startButton);
-		pauseButton = (TextView) findViewById(R.id.pauseButton);
+		rulesButton = (TextView) findViewById(R.id.rulesButton);
 
+		rulesButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(FirstGame.this);
+				builder.setMessage("Play against the computer who is flipping tiles faster and faster")
+				.setTitle("Speed Tile Rules");
+				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			               // User clicked OK button
+			        	   dialog.dismiss();
+			           }
+			       });				
+				builder.show();
+			}
+
+		});
+		
 		startButton.setOnClickListener(new View.OnClickListener() {
 
 
@@ -180,16 +198,6 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		});
 
 
-
-		pauseButton.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View view) {
-
-				timeSwapBuff += timeInMilliseconds;
-				customHandler.removeCallbacks(updateTimerThread);
-
-			}
-		});
 
 	}
 

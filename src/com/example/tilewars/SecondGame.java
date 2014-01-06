@@ -4,6 +4,8 @@ import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -31,7 +33,7 @@ import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 @SuppressLint({ "ShowToast", "NewApi" })
 public class SecondGame extends Activity implements FlipCompleteListener {
 	private TextView nextButton;
-	private TextView pauseButton;
+	private TextView rulesButton;
 
 	private TextView levelValue;
 	private TextView maxLevelTV;
@@ -170,7 +172,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		levelValue = (TextView) findViewById(R.id.levelValue);
 		levelValue.setText("Current Level : " + level);
 		nextButton = (TextView) findViewById(R.id.nextButton);
-		pauseButton = (TextView) findViewById(R.id.pauseButton);
+		rulesButton = (TextView) findViewById(R.id.rulesButton);
 
 		nextButton.setOnClickListener(new View.OnClickListener() {
 
@@ -195,16 +197,22 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 
 		});
 
-		pauseButton.setOnClickListener(new View.OnClickListener() {
-
+		rulesButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-
-				timeSwapBuff += timeInMilliseconds;
-				customHandler.removeCallbacks(updateTimerThread);
-
+				AlertDialog.Builder builder = new AlertDialog.Builder(SecondGame.this);
+				builder.setMessage("Remember where the tiles were shown.")
+				.setTitle("Memory Tile Rules");
+				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			               // User clicked OK button
+			        	   dialog.dismiss();
+			           }
+			       });				
+				builder.show();
 			}
-		});
 
+		});
+		
 	}
 
 	public void Flip() {
