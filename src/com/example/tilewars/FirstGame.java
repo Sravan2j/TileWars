@@ -57,7 +57,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 	private Handler flipHandler = new Handler();
 
 
-	int blueColor=Color.parseColor("#75DB1B");
+	int greenColor=Color.parseColor("#75DB1B");
 	boolean flag=false;
 
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14, R.id.tv15, R.id.tv16,
@@ -331,7 +331,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		else
 			reqTextView = TextViewids[13];
 		((TextView)findViewById(reqTextView)).setText("G");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
+		((TextView)findViewById(reqTextView)).setBackgroundColor(greenColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[14]) reqTextView = TextViewbids[14]; 
@@ -339,7 +339,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[14];
 
 		((TextView)findViewById(reqTextView)).setText("A");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
+		((TextView)findViewById(reqTextView)).setBackgroundColor(greenColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[15]) reqTextView = TextViewbids[15]; 
@@ -347,7 +347,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[15];
 
 		((TextView)findViewById(reqTextView)).setText("M");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
+		((TextView)findViewById(reqTextView)).setBackgroundColor(greenColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[16]) reqTextView = TextViewbids[16]; 
@@ -355,7 +355,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[16];
 
 		((TextView)findViewById(reqTextView)).setText("E");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
+		((TextView)findViewById(reqTextView)).setBackgroundColor(greenColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[19]) reqTextView = TextViewbids[19]; 
@@ -363,7 +363,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[19];
 
 		((TextView)findViewById(reqTextView)).setText("O");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
+		((TextView)findViewById(reqTextView)).setBackgroundColor(greenColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[20]) reqTextView = TextViewbids[20]; 
@@ -371,7 +371,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[20];
 
 		((TextView)findViewById(reqTextView)).setText("V");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
+		((TextView)findViewById(reqTextView)).setBackgroundColor(greenColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[21]) reqTextView = TextViewbids[21]; 
@@ -379,7 +379,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[21];
 
 		((TextView)findViewById(reqTextView)).setText("E");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
+		((TextView)findViewById(reqTextView)).setBackgroundColor(greenColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[22]) reqTextView = TextViewbids[22]; 
@@ -387,7 +387,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[22];
 
 		((TextView)findViewById(reqTextView)).setText("R");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
+		((TextView)findViewById(reqTextView)).setBackgroundColor(greenColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		currentGameTimeValue=(String) timerValue.getText();

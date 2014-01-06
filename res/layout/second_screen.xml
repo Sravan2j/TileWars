@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,7 +40,7 @@
                     android:id="@+id/tv11"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -67,7 +67,7 @@
                     android:id="@+id/tv12"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -94,7 +94,7 @@
                     android:id="@+id/tv13"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -121,7 +121,7 @@
                     android:id="@+id/tv14"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -148,7 +148,7 @@
                     android:id="@+id/tv15"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -175,7 +175,7 @@
                     android:id="@+id/tv16"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -220,7 +220,7 @@
                     android:id="@+id/tv21"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -247,7 +247,7 @@
                     android:id="@+id/tv22"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -274,7 +274,7 @@
                     android:id="@+id/tv23"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -301,7 +301,7 @@
                     android:id="@+id/tv24"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -328,7 +328,7 @@
                     android:id="@+id/tv25"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -355,7 +355,7 @@
                     android:id="@+id/tv26"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -400,7 +400,7 @@
                     android:id="@+id/tv31"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -427,15 +427,17 @@
                     android:id="@+id/tv32"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
-                    android:gravity="center" />
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
 
                 <TextView
                     android:id="@+id/tvb32"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
             </ViewFlipper>
 
             <View
@@ -454,15 +456,17 @@
                     android:id="@+id/tv33"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
-                    android:gravity="center" />
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
 
                 <TextView
                     android:id="@+id/tvb33"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
             </ViewFlipper>
 
             <View
@@ -481,15 +485,17 @@
                     android:id="@+id/tv34"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
-                    android:gravity="center" />
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
 
                 <TextView
                     android:id="@+id/tvb34"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
             </ViewFlipper>
 
             <View
@@ -508,15 +514,17 @@
                     android:id="@+id/tv35"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
-                    android:gravity="center" />
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
 
                 <TextView
                     android:id="@+id/tvb35"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
             </ViewFlipper>
 
             <View
@@ -535,7 +543,7 @@
                     android:id="@+id/tv36"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -580,7 +588,7 @@
                     android:id="@+id/tv41"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -607,15 +615,17 @@
                     android:id="@+id/tv42"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
-                    android:gravity="center" />
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
 
                 <TextView
                     android:id="@+id/tvb42"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
             </ViewFlipper>
 
             <View
@@ -634,15 +644,17 @@
                     android:id="@+id/tv43"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
-                    android:gravity="center" />
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
 
                 <TextView
                     android:id="@+id/tvb43"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
             </ViewFlipper>
 
             <View
@@ -661,15 +673,17 @@
                     android:id="@+id/tv44"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
-                    android:gravity="center" />
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
 
                 <TextView
                     android:id="@+id/tvb44"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
             </ViewFlipper>
 
             <View
@@ -688,15 +702,17 @@
                     android:id="@+id/tv45"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
-                    android:gravity="center" />
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
 
                 <TextView
                     android:id="@+id/tvb45"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
             </ViewFlipper>
 
             <View
@@ -715,7 +731,7 @@
                     android:id="@+id/tv46"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -760,7 +776,7 @@
                     android:id="@+id/tv51"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -787,7 +803,7 @@
                     android:id="@+id/tv52"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -814,7 +830,7 @@
                     android:id="@+id/tv53"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -841,7 +857,7 @@
                     android:id="@+id/tv54"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -868,7 +884,7 @@
                     android:id="@+id/tv55"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -895,7 +911,7 @@
                     android:id="@+id/tv56"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -940,7 +956,7 @@
                     android:id="@+id/tv61"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -967,7 +983,7 @@
                     android:id="@+id/tv62"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -994,7 +1010,7 @@
                     android:id="@+id/tv63"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -1021,7 +1037,7 @@
                     android:id="@+id/tv64"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -1048,7 +1064,7 @@
                     android:id="@+id/tv65"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -1075,7 +1091,7 @@
                     android:id="@+id/tv66"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4374E0"
+                    android:background="#808080"
                     android:gravity="center" />
 
                 <TextView
@@ -1098,48 +1114,111 @@
             android:layout_weight="1" />
     </com.example.tilewars.SquareLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#000000"
-        android:clipChildren="false"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/levelValue"
-            android:layout_width="wrap_content"
+   
+    
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"        
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:paddingBottom="4dp"
+        android:stretchColumns="1" >
+
+        <TableRow
+            android:id="@+id/tableRow0"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clipChildren="false"
             android:gravity="center_horizontal"
-            android:text="@string/levelVal"
-            android:textSize="40sp" />
-    </LinearLayout>
+            android:paddingBottom="10dp" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#000000"
-        android:clipChildren="false"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/maxLevelValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"                               
+                android:text="@string/maxLevelVal"
+                android:textColor="#001082" />
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="10dp" >
 
-        <Button
-            android:id="@+id/nextButton"
+            <TextView
+                android:id="@+id/levelValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:gravity="center_horizontal"                         
+                android:text="@string/levelVal"
+                android:textColor="#001082" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/nextButtonLabel" />
+            android:paddingBottom="15dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp" >
 
-        <Button
-            android:id="@+id/pauseButton"
+            <TextView
+                android:id="@+id/nextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_horizontal"
+                android:text="Next"
+                android:textColor="#001082" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/pauseButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_horizontal"
+                android:text="Rules"
+                android:textColor="#001082" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/pauseButtonLabel" />
-    </LinearLayout>
+            android:layout_height="wrap_content" >
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/play"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:drawableTop="@drawable/playbg"
+                android:gravity="center_horizontal"
+                android:text="Play"
+                android:textColor="#001082" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/games"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:drawableTop="@drawable/gearbg"
+                android:gravity="center_horizontal"
+                android:text="Games"
+                android:textColor="#001082" >
+            </TextView>
+        </TableRow>
+    </TableLayout>
+    
+    
+</RelativeLayout>
