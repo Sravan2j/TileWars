@@ -7,11 +7,12 @@
     <string name="timerVal">00:00:00</string>
     <string name="levelVal">Current Level : </string>
     <string name="maxLevelVal">Max Level : </string>
+    <string name="blueVal">Blue Score : </string>
+    <string name="redVal">Red Score : </string>
     <string name="pauseButtonLabel">Pause</string>
     <string name="startButtonLabel">Start</string>
     <string name="nextButtonLabel">Next</string>
-    <string name="blueVal">Blue Count : </string>
-    <string name="redVal">Red Count : </string>
+    <string name="resetButtonLabel">Reset</string>    
     <string name="title_activity_fourth_game">FourthGame</string>
 
 </resources>
