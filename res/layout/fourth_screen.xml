@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -1098,56 +1098,107 @@
             android:layout_weight="1" />
     </com.example.tilewars.SquareLayout>
 
-    <LinearLayout
+<TableLayout
+        android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#000000"
-        android:clipChildren="false"
-        android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"        
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:paddingBottom="4dp"
+        android:stretchColumns="1" >
 
-        <TextView
-            android:id="@+id/blueValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"            
-            android:layout_weight="1"
-            android:clipChildren="false"
-            android:text="@string/blueVal"
-            android:textSize="40sp" />
+        <TableRow
+            android:id="@+id/tableRow0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="10dp" >
 
-        <TextView
-            android:id="@+id/redValue"
+            <TextView
+                android:id="@+id/blueValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"                               
+                android:text="@string/blueVal"
+                android:textColor="#001082" />
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="10dp" >
+
+            <TextView
+                android:id="@+id/redValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:gravity="center_horizontal"                         
+                android:text="@string/redVal"
+                android:textColor="#001082" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clipChildren="false"
-            android:text="@string/redVal"
-            android:textSize="40sp" />
-    </LinearLayout>
+            android:paddingBottom="15dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#000000"
-        android:clipChildren="false"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/resetButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_horizontal"
+                android:text="@string/resetButtonLabel"
+                android:textColor="#001082" >
+            </TextView>
 
-        <Button
-            android:id="@+id/nextButton"
+            <TextView
+                android:id="@+id/pauseButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_horizontal"
+                android:text="Rules"
+                android:textColor="#001082" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/nextButtonLabel" />
+            android:layout_height="wrap_content" >
 
-        <Button
-            android:id="@+id/pauseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/pauseButtonLabel" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/play"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:drawableTop="@drawable/playbg"
+                android:gravity="center_horizontal"
+                android:text="Play"
+                android:textColor="#001082" >
+            </TextView>
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/games"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:drawableTop="@drawable/gearbg"
+                android:gravity="center_horizontal"
+                android:text="Games"
+                android:textColor="#001082" >
+            </TextView>
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>
