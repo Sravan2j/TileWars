@@ -5,21 +5,21 @@ import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -32,22 +32,33 @@ import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 
 @SuppressLint({ "ShowToast", "NewApi" })
 public class FirstGame extends Activity implements FlipCompleteListener{
-	private Button startButton;
-	private Button pauseButton;
+	private TextView startButton;
+	private TextView pauseButton;
 
 	private TextView timerValue;
+	private TextView maxTimerTV;
 
 	private long startTime = 0L;
-
-	private Handler customHandler = new Handler();
-	private Handler flipHandler = new Handler();
-
 	long timeInMilliseconds = 0L;
 	long timeSwapBuff = 0L;
 	long updatedTime = 0L;
 	int sleepValue = 600;
 	int maxCells=1;
 	int userClick=0;
+	int count=0;
+	String maxTimeValue="";
+	String currentGameTimeValue="";
+	int maxTimeMillisVal=0;
+	int currTimeMillisVal=0;
+
+
+
+	private Handler customHandler = new Handler();
+	private Handler flipHandler = new Handler();
+
+
+	int blueColor=Color.parseColor("#75DB1B");
+	boolean flag=false;
 
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14, R.id.tv15, R.id.tv16,
 			R.id.tv21, R.id.tv22, R.id.tv23, R.id.tv24, R.id.tv25, R.id.tv26,
@@ -80,7 +91,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 
 
-	int count=0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,159 +109,79 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			setContentView(R.layout.first_screen);
 		}
 
-		/*final ViewFlipper vf11 = (ViewFlipper)findViewById(R.id.vf11);
-		final ViewFlipper vf12 = (ViewFlipper)findViewById(R.id.vf12);
-		final ViewFlipper vf13 = (ViewFlipper)findViewById(R.id.vf13);
-		final ViewFlipper vf14 = (ViewFlipper)findViewById(R.id.vf14);
-		final ViewFlipper vf15 = (ViewFlipper)findViewById(R.id.vf15);
-		final ViewFlipper vf21 = (ViewFlipper)findViewById(R.id.vf21);
-		final ViewFlipper vf22 = (ViewFlipper)findViewById(R.id.vf22);
-		final ViewFlipper vf23 = (ViewFlipper)findViewById(R.id.vf23);
-		final ViewFlipper vf24 = (ViewFlipper)findViewById(R.id.vf24);
-		final ViewFlipper vf25 = (ViewFlipper)findViewById(R.id.vf25);
-		final ViewFlipper vf31 = (ViewFlipper)findViewById(R.id.vf31);
-		final ViewFlipper vf32 = (ViewFlipper)findViewById(R.id.vf32);
-		final ViewFlipper vf33 = (ViewFlipper)findViewById(R.id.vf33);
-		final ViewFlipper vf34 = (ViewFlipper)findViewById(R.id.vf34);
-		final ViewFlipper vf35 = (ViewFlipper)findViewById(R.id.vf35);
-		final ViewFlipper vf41 = (ViewFlipper)findViewById(R.id.vf41);
-		final ViewFlipper vf42 = (ViewFlipper)findViewById(R.id.vf42);
-		final ViewFlipper vf43 = (ViewFlipper)findViewById(R.id.vf43);
-		final ViewFlipper vf44 = (ViewFlipper)findViewById(R.id.vf44);
-		final ViewFlipper vf45 = (ViewFlipper)findViewById(R.id.vf45);
-		final ViewFlipper vf51 = (ViewFlipper)findViewById(R.id.vf51);
-		final ViewFlipper vf52 = (ViewFlipper)findViewById(R.id.vf52);
-		final ViewFlipper vf53 = (ViewFlipper)findViewById(R.id.vf53);
-		final ViewFlipper vf54 = (ViewFlipper)findViewById(R.id.vf54);
-		final ViewFlipper vf55 = (ViewFlipper)findViewById(R.id.vf55);*/
+		loadSavedPreferences();
 
-		/*((TextView)findViewById(TextViewids[1])).setText("G");		
-		//Toast.makeText(this, ((TextView)findViewById(TextViewids[1])).getWidth()+"", Toast.LENGTH_SHORT).show();
-		Float size= (float) ((((TextView)findViewById(TextViewids[1])).getWidth()) * 0.75);
-		((TextView)findViewById(TextViewids[1])).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);*/
+		TextView games = (TextView) findViewById(R.id.games);
+		games.setOnClickListener(new View.OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
 
-
-
-		/*for (int i = 0; i < TextViewids.length; i++) {
-
-			TextView t1= (TextView)(findViewById(TextViewids[i]));
-			t1.setHeight(t1.getWidth());
-		}
-		for (int i = 0; i < TextViewbids.length; i++) {
-
-			TextView t1= (TextView)(findViewById(TextViewbids[i]));
-			t1.setHeight(t1.getWidth());
-		}*/
-
-
-
-
-
-		/*		for (int i = 0; i < 36; i++) {
-			final int choiceIndex = i;
-			findViewById(TextViewids[i]).setOnClickListener( new View.OnClickListener() {
-				public void onClick(View v) {
-
-					((TextView)findViewById(TextViewids[1])).setText("G");		
-					//Toast.makeText(this, ((TextView)findViewById(TextViewids[1])).getWidth()+"", Toast.LENGTH_SHORT).show();
-					Float size= (float) ((((TextView)findViewById(TextViewids[1])).getWidth()) * 0.75);
-					((TextView)findViewById(TextViewids[1])).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
-					AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[choiceIndex]), FlipDirection.LEFT_RIGHT);
-					int[] location = new int[2];
-					((TextView)findViewById(TextViewids[choiceIndex])).getLocationInWindow(location);
-					//Toast.makeText(FirstGame.this, ((TextView)findViewById(TextViewids[1])).getWidth()+"", Toast.LENGTH_SHORT).show();
-					//Toast.makeText(MainActivity.this, location[0]+""+location[1] +"", Toast.LENGTH_SHORT).show();
-					//Toast.makeText(FirstGame.this, ((TextView)findViewById(TextViewids[choiceIndex])).getX()+"", Toast.LENGTH_SHORT).show();
-					Animation animation = new TranslateAnimation(0,-location[0], 0,-location[1]);
-					animation.setDuration(1000);
-
-					animation.setZAdjustment(Animation.ZORDER_TOP);
-					animation.setFillAfter(true);
-					((TextView)findViewById(TextViewids[choiceIndex])).startAnimation(animation);
-
-					ObjectAnimator transAnimation= ObjectAnimator.ofFloat((TextView)findViewById(TextViewids[choiceIndex]), "translationX", 0, -100);
-
-					transAnimation.setDuration(3000);//set duration
-
-
-					//findViewById(TextViewids[choiceIndex]).animate().x(-location[0]).y(-location[1]).setDuration(2000);
-					transAnimation.start();//start animation
-
-					PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat("x", -location[0]-2);
-					PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat("y", -location[1]-2);
-					ObjectAnimator.ofPropertyValuesHolder(findViewById(TextViewids[choiceIndex]), pvhX, pvhY).setDuration(2000).start();
-
-
-				}
-			});
-			 			findViewById(TextViewbids[i]).setOnClickListener( new View.OnClickListener() {
-				 public void onClick(View v) {
-					 Log.i("choiceIndex", choiceIndex+"");
-					 AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[choiceIndex]), FlipDirection.LEFT_RIGHT);					
-					 count--;
-
-					 if(userClick++==50) {maxCells++; userClick=0;}
-					 update(choiceIndex);
-
-
-				 }
-			 });
-		}*/
-
-
-
-		/*Button okButton = (Button) findViewById(R.id.okButton);
-
-		okButton.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View view) {
-
-				AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[15]), FlipDirection.LEFT_RIGHT);
-
-				int[] location = new int[2];
-				((TextView)findViewById(TextViewids[15])).getLocationInWindow(location);
-
-				int[] location1 = new int[2];
-				((TextView)findViewById(TextViewids[3])).getLocationInWindow(location1);
-
-				Animation animation = new TranslateAnimation(0,location[0]-location1[0], 0,location[1]-location1[1]);
-				animation.setDuration(1000);
-				animation.setZAdjustment(1000);
-				((TextView)findViewById(TextViewids[3])).startAnimation(animation);
-
-
-				Animation animation1 = new TranslateAnimation(0,-location[0]+location1[0], 0,-location[1]+location1[1]);
-				animation1.setDuration(1000);
-				animation1.setZAdjustment(-1000);
-				((TextView)findViewById(TextViewids[15])).startAnimation(animation1);
-
+				Intent intent = new Intent(FirstGame.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
+				startActivity(intent);
 			}
 		});
-*/
+		
+		
+		
+		for (int i=0;i<36;i++)
+		{		
+			final int choiceIndex = i;			
+			findViewById(TextViewbids[i]).setOnClickListener( new View.OnClickListener() {
+				public void onClick(View v) {						 
+					update(choiceIndex,-1);
+					AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[choiceIndex]), FlipDirection.LEFT_RIGHT);					
+					//count--;
+					userClick++;
+					if(userClick==50) {maxCells++; userClick=0;}
+
+				}
+			});			
+		}
 
 
 		timerValue = (TextView) findViewById(R.id.timerValue);
-		startButton = (Button) findViewById(R.id.startButton);
-		pauseButton = (Button) findViewById(R.id.pauseButton);
+		maxTimerTV = (TextView) findViewById(R.id.maxTimerValue);
+		maxTimerTV.setText(maxTimeValue);
 
-		pauseButton.setOnClickListener(new View.OnClickListener() {
+		startButton = (TextView) findViewById(R.id.startButton);
+		pauseButton = (TextView) findViewById(R.id.pauseButton);
+
+		startButton.setOnClickListener(new View.OnClickListener() {
 
 
 			public void onClick(View view) {
 				//new FlipTask().execute();
-				startTime = SystemClock.uptimeMillis();
-				customHandler.postDelayed(updateTimerThread, 0);
-				resetGame();
-				flipHandler.postDelayed(flipRun, sleepValue);
 
+				if(flag)
+				{
+
+					customHandler.removeCallbacks(updateTimerThread);
+					flipHandler.removeCallbacks(flipRun);					
+					timerValue.setText("00:00:00");
+					resetGame();					
+					flag=false;
+					startButton.setText("Start");
+
+				}
+				else
+				{
+					flag=true;
+					startTime = SystemClock.uptimeMillis();
+					customHandler.postDelayed(updateTimerThread, 0);
+					//resetGame();
+					flipHandler.postDelayed(flipRun, sleepValue);
+					startButton.setText("Reset");
+				}
 			}
 
 		});
 
 
 
-		startButton.setOnClickListener(new View.OnClickListener() {
+		pauseButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {
 
@@ -267,30 +198,19 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 	Runnable flipRun = new Runnable() {
 		@Override
 		public void run() {
-			boolean flag=true;
+
 			Random rand = new Random();
 			int random=0;
 			int cells = rand.nextInt(maxCells)+1;
 			Log.i("cells",cells+"");
 			while(cells>0){
 				cells--;
-				/*try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
+
 				random=rand.nextInt(36);
 				while(isFlipped[random]) {random=rand.nextInt(36);} 
 				update(random,1);
 				AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[random]), FlipDirection.LEFT_RIGHT);
 				if (count==10) gameOver();
-				//count++;
-				
-				//if (count==10)
-				//flag=false;
-
-
 			}
 			if (sleepValue>50) sleepValue-=5;
 			if (count<10)
@@ -303,6 +223,9 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 	public void resetGame()
 	{
+
+		timeSwapBuff = 0L;				
+
 		maxCells = 1;
 		userClick = 0;
 		sleepValue = 600;
@@ -325,7 +248,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 				if((i>12 && i<17) || (i>18 && i<23))
 				{					
 					((TextView)findViewById(TextViewids[i])).setText("");
-					((TextView)findViewById(TextViewids[i])).setBackgroundColor(Color.parseColor("#4374E0"));
+					((TextView)findViewById(TextViewids[i])).setBackgroundColor(Color.parseColor("#808080"));
 				}
 			}
 
@@ -336,7 +259,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 					//count--;
 					userClick++;
 					if(userClick==50) {maxCells++; userClick=0;}
-					
+
 				}
 			});
 			i++;
@@ -346,7 +269,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 	{
 		isFlipped[index] = !isFlipped[index];
 		count+=num;
-		
+
 	}
 
 
@@ -384,23 +307,6 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 	@Override
 	public void flipOutComplete() {
 		// TODO Auto-generated method stub
-
-		/*		int[] location = new int[2];
-		((TextView)findViewById(TextViewids[15])).getLocationInWindow(location);
-
-		int[] location1 = new int[2];
-		((TextView)findViewById(TextViewids[3])).getLocationInWindow(location1);
-
-		Animation animation = new TranslateAnimation(0,location[0]-location1[0], 0,location[1]-location1[1]);
-		animation.setDuration(1000);
-		animation.setZAdjustment(Animation.ZORDER_TOP);
-		((TextView)findViewById(TextViewids[3])).startAnimation(animation);
-
-
-		Animation animation1 = new TranslateAnimation(0,-location[0]+location1[0], 0,-location[1]+location1[1]);
-		animation1.setDuration(1000);
-		((TextView)findViewById(TextViewids[15])).startAnimation(animation1);*/
-
 	}
 
 
@@ -411,10 +317,10 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 	}
 
-	public void gameOver() {
-
+	public void gameOver() {		
 		timeSwapBuff += timeInMilliseconds;
 		customHandler.removeCallbacks(updateTimerThread);
+
 		for (int i = 0; i < 36; i++) {		
 			findViewById(TextViewbids[i]).setOnClickListener(null);
 		}
@@ -425,7 +331,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		else
 			reqTextView = TextViewids[13];
 		((TextView)findViewById(reqTextView)).setText("G");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(Color.parseColor("#75DB1B"));
+		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[14]) reqTextView = TextViewbids[14]; 
@@ -433,7 +339,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[14];
 
 		((TextView)findViewById(reqTextView)).setText("A");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(Color.parseColor("#75DB1B"));
+		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[15]) reqTextView = TextViewbids[15]; 
@@ -441,7 +347,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[15];
 
 		((TextView)findViewById(reqTextView)).setText("M");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(Color.parseColor("#75DB1B"));
+		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[16]) reqTextView = TextViewbids[16]; 
@@ -449,7 +355,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[16];
 
 		((TextView)findViewById(reqTextView)).setText("E");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(Color.parseColor("#75DB1B"));
+		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[19]) reqTextView = TextViewbids[19]; 
@@ -457,7 +363,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[19];
 
 		((TextView)findViewById(reqTextView)).setText("O");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(Color.parseColor("#75DB1B"));
+		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[20]) reqTextView = TextViewbids[20]; 
@@ -465,7 +371,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[20];
 
 		((TextView)findViewById(reqTextView)).setText("V");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(Color.parseColor("#75DB1B"));
+		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[21]) reqTextView = TextViewbids[21]; 
@@ -473,7 +379,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[21];
 
 		((TextView)findViewById(reqTextView)).setText("E");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(Color.parseColor("#75DB1B"));
+		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
 		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
 
 		if(isFlipped[22]) reqTextView = TextViewbids[22]; 
@@ -481,53 +387,50 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			reqTextView = TextViewids[22];
 
 		((TextView)findViewById(reqTextView)).setText("R");
-		((TextView)findViewById(reqTextView)).setBackgroundColor(Color.parseColor("#75DB1B"));
-		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);									
+		((TextView)findViewById(reqTextView)).setBackgroundColor(blueColor);
+		((TextView)findViewById(reqTextView)).setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
+
+		currentGameTimeValue=(String) timerValue.getText();
+		String[] splitValues = currentGameTimeValue.split(":"); 
+		currTimeMillisVal=(Integer.parseInt(splitValues[0])*60000) + (Integer.parseInt(splitValues[1])*1000)+Integer.parseInt(splitValues[2]);
+		if (maxTimeMillisVal<currTimeMillisVal)
+		{
+			maxTimeMillisVal=currTimeMillisVal;
+			maxTimeValue=currentGameTimeValue;
+			maxTimerTV.setText(maxTimeValue);
+		}
 
 	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		updateSavedPreferences();
+	}
+	private void loadSavedPreferences() {
+		SharedPreferences sharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
 
-	class FlipTask extends AsyncTask<String, Void, String> {
-		protected String doInBackground(String... urls) {
-			String result = null;
-			/*			boolean flag=true;
-			Random rand = new Random();
-			int random=0;
-			while(flag){
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				random=rand.nextInt(36);
-				AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[random]), FlipDirection.LEFT_RIGHT);
-				count++;
-
-				//if (count==10)
-					flag=false;
-			}*/
-
-			return result;
+		if (sharedPreferences.contains("TilesFirstGame")){
+			maxTimeValue= sharedPreferences.getString("TilesFirstGame", "");
+			if (maxTimeValue!=""){								
+				String[] splitValues = maxTimeValue.split(":"); 
+				maxTimeMillisVal=(Integer.parseInt(splitValues[0])*60000) + (Integer.parseInt(splitValues[1])*1000)+Integer.parseInt(splitValues[2]);
+			}			
 		}
+	}
 
-		protected void onPostExecute(String result) {
-			boolean flag=true;
-			Random rand = new Random();
-			int random=0;
-			while(flag){
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				random=rand.nextInt(36);
-				AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[random]), FlipDirection.LEFT_RIGHT);
-				count++;
 
-				//if (count==10)
-				flag=false;
-			}
-		}
-	}	
+	private void updateSavedPreferences() {
+		SharedPreferences sharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		Editor editor = sharedPreferences.edit();
+		if (sharedPreferences.contains("TilesFirstGame")){
+			editor.remove("TilesFirstGame");
+		}	
+		editor.putString("TilesFirstGame", maxTimeValue);
+		editor.commit();
+	}
+
 }

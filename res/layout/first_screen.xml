@@ -1,981 +1,1220 @@
-    <LinearLayout
- xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-<com.example.tilewars.SquareLayout 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/sqlayout"
-    android:orientation="vertical"
-    android:clipChildren="false"
-     >
-
-    <View
+    <com.example.tilewars.SquareLayout
+        android:id="@+id/sqlayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"                
+        android:layout_height="match_parent"
         android:clipChildren="false"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
         <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-        <ViewFlipper
-            android:id="@+id/vf11"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:clipChildren="false"
+            android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tv11"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"				
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb11"
-                android:layout_width="match_parent"
+            <View
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf11"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf12"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv12"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb12"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf13"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv13"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb13"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf14"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv14"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb14"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf15"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv15"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb15"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf16"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-        <ViewFlipper
-            android:id="@+id/vf12"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            
-            android:layout_weight="4" android:clipChildren="false" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:clipChildren="false"
+            android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tv12"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"                
-                android:background="#4374E0"  android:gravity="center"                               
-                
-                />
-
-            <TextView
-                android:id="@+id/tvb12"
-                android:layout_width="match_parent"
+            <View
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf21"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv21"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb21"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf22"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv22"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb22"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf23"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv23"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb23"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf24"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf25"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv25"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb25"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf26"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv26"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb26"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-        <ViewFlipper
-            android:id="@+id/vf13"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:clipChildren="false"
+            android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tv13"
-                android:layout_width="match_parent"
+            <View
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
+                android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/tvb13"
-                android:layout_width="match_parent"
+            <ViewFlipper
+                android:id="@+id/vf31"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv31"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb31"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf32"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv32"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+
+                <TextView
+                    android:id="@+id/tvb32"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf33"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv33"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+
+                <TextView
+                    android:id="@+id/tvb33"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf34"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv34"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+
+                <TextView
+                    android:id="@+id/tvb34"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf35"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv35"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+
+                <TextView
+                    android:id="@+id/tvb35"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf36"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv36"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb36"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-        <ViewFlipper
-            android:id="@+id/vf14"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:clipChildren="false"
+            android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tv14"
-                android:layout_width="match_parent"
+            <View
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
+                android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/tvb14"
-                android:layout_width="match_parent"
+            <ViewFlipper
+                android:id="@+id/vf41"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv41"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb41"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf42"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv42"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+
+                <TextView
+                    android:id="@+id/tvb42"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf43"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv43"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+
+                <TextView
+                    android:id="@+id/tvb43"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf44"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv44"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+
+                <TextView
+                    android:id="@+id/tvb44"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf45"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv45"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+
+                <TextView
+                    android:id="@+id/tvb45"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center"
+                    android:textColor="#4374E0" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf46"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv46"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb46"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-        <ViewFlipper
-            android:id="@+id/vf15"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:clipChildren="false"
+            android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tv15"
-                android:layout_width="match_parent"
+            <View
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
+                android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/tvb15"
-                android:layout_width="match_parent"
+            <ViewFlipper
+                android:id="@+id/vf51"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv51"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb51"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf52"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv52"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb52"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf53"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv53"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb53"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf54"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv54"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb54"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf55"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv55"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb55"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf56"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv56"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb56"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-        
-          <ViewFlipper
-            android:id="@+id/vf16"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/tv16"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:clipChildren="false"
+            android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tvb16"
-                android:layout_width="match_parent"
+            <View
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf61"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv61"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb61"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf62"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv62"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb62"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf63"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv63"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb63"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf64"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv64"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb64"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf65"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv65"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb65"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ViewFlipper
+                android:id="@+id/vf66"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:clipChildren="false" >
+
+                <TextView
+                    android:id="@+id/tv66"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#808080"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvb66"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#BC0001"
+                    android:gravity="center" />
+            </ViewFlipper>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-        
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </com.example.tilewars.SquareLayout>
 
-    <View
+
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4" android:clipChildren="false"
-        android:orientation="horizontal" >
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf21"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv21"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb21"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf22"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv22"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb22"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf23"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv23"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb23"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf24"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv24"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb24"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf25"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv25"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb25"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-        
-                  <ViewFlipper
-            android:id="@+id/vf26"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv26"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb26"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-        
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4" android:clipChildren="false"
-        android:orientation="horizontal" >
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf31"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv31"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb31"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf32"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv32"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb32"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf33"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv33"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb33"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf34"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv34"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb34"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf35"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv35"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb35"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-                  <ViewFlipper
-            android:id="@+id/vf36"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv36"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb36"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-        
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4" android:clipChildren="false"
-        android:orientation="horizontal" >
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf41"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv41"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb41"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf42"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv42"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb42"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf43"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv43"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb43"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf44"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv44"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb44"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf45"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv45"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb45"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-                  <ViewFlipper
-            android:id="@+id/vf46"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv46"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb46"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-        
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4" android:clipChildren="false"
-        android:orientation="horizontal" >
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf51"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv51"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb51"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf52"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv52"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb52"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf53"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv53"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb53"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf54"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv54"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb54"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf55"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv55"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb55"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-                  <ViewFlipper
-            android:id="@+id/vf56"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv56"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb56"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-        
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4" android:clipChildren="false"
-        android:orientation="horizontal" >
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf61"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv61"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb61"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf62"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv62"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb62"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf63"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv63"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb63"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf64"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv64"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb64"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-
-        <ViewFlipper
-            android:id="@+id/vf65"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv65"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb65"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-                  <ViewFlipper
-            android:id="@+id/vf66"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="4" android:clipChildren="false" >
-
-            <TextView
-                android:id="@+id/tv66"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4374E0"  android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tvb66"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#BC0001"  android:gravity="center"/>
-        </ViewFlipper>
-
-        <View
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent" />
-        
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="1" />
-
-
-
-</com.example.tilewars.SquareLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="#000000"
-        android:layout_weight="1" android:clipChildren="false"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/timerValue"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"        
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:paddingBottom="4dp"
+        android:stretchColumns="1" >
+
+        <TableRow
+            android:id="@+id/tableRow0"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/timerVal"
             android:gravity="center_horizontal"
-            android:layout_weight="1" android:clipChildren="false"                        
-            android:textSize="40sp" />
+            android:paddingBottom="10dp" >
 
-        <Button
-            android:id="@+id/startButton"
+            <TextView
+                android:id="@+id/maxTimerValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"                               
+                android:text="@string/timerVal"
+                android:textColor="#001082" />
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="10dp" >
+
+            <TextView
+                android:id="@+id/timerValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"                          
+                android:text="@string/timerVal"
+                android:textColor="#001082" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/startButtonLabel" />
+            android:paddingBottom="15dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp" >
 
-        
-        <Button
-            android:id="@+id/pauseButton"
+            <TextView
+                android:id="@+id/startButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_horizontal"
+                android:text="Start"
+                android:textColor="#001082" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/pauseButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_horizontal"
+                android:text="Rules"
+                android:textColor="#001082" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/pauseButtonLabel" />
-        
+            android:layout_height="wrap_content" >
 
-    </LinearLayout> 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/play"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:drawableTop="@drawable/playbg"
+                android:gravity="center_horizontal"
+                android:text="Play"
+                android:textColor="#001082" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/games"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:drawableTop="@drawable/gearbg"
+                android:gravity="center_horizontal"
+                android:text="Games"
+                android:textColor="#001082" >
+            </TextView>
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>
