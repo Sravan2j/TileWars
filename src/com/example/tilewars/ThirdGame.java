@@ -115,11 +115,12 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		if (android.os.Build.VERSION.SDK_INT <= 10) {
+		/*if (android.os.Build.VERSION.SDK_INT <= 10) {
 			setContentView(R.layout.apilt11_main);
 		} else {
 			setContentView(R.layout.third_screen);
-		}
+		}*/
+		setContentView(R.layout.third_screen);
 
 		TextView games = (TextView) findViewById(R.id.games);
 		games.setOnClickListener(new View.OnClickListener() {

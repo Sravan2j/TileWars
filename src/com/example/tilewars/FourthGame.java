@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -115,6 +116,21 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 			setContentView(R.layout.fourth_screen);
 		}*/
 		setContentView(R.layout.fourth_screen);
+		
+		
+		TextView games = (TextView) findViewById(R.id.games);
+		games.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Intent intent = new Intent(FourthGame.this, MainActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
+				startActivity(intent);
+			}
+		});
+
 
 		for (int i = 0; i < 36; i++) {
 			final int choiceIndex = i;
