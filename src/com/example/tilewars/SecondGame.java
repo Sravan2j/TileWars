@@ -13,7 +13,6 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
@@ -37,9 +36,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 
 	private TextView levelValue;
 	private TextView maxLevelTV;
-	private long startTime = 0L;
-
-	private Handler customHandler = new Handler();
+		
 	private Handler flipHandler = new Handler();
 
 	private Handler swapHandler = new Handler();
@@ -48,16 +45,13 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	int maxLevelValue = 0;
 	int level = 0;
 	int swaps = 0;
-	int flipscount = 0;
-
-	long timeInMilliseconds = 0L;
-	long timeSwapBuff = 0L;
-	long updatedTime = 0L;
-	int sleepValue = 600;
+	int flipscount = 0;	
 	int maxCells = 1;
 	int userClick = 0;
 	boolean computer = true;
 	boolean gameover = false;
+	Animation animation1=null;
+	Animation animation2=null;
 
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14,
 			R.id.tv15, R.id.tv16, R.id.tv21, R.id.tv22, R.id.tv23, R.id.tv24,
@@ -100,7 +94,6 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 			R.id.tvb65, R.id.tvb66 };
 
 	int remaining = 0;
-	int count = 0;
 	int swaps1 = 0;
 	int swaps2 = 0;
 	Random rand = new Random();
@@ -115,11 +108,12 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		if (android.os.Build.VERSION.SDK_INT <= 10) {
+		/*if (android.os.Build.VERSION.SDK_INT <= 10) {
 			setContentView(R.layout.apilt11_main);
 		} else {
 			setContentView(R.layout.second_screen);
-		}
+		}*/
+		setContentView(R.layout.second_screen);
 		loadSavedPreferences();
 
 		TextView games = (TextView) findViewById(R.id.games);
@@ -325,14 +319,14 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		((TextView) findViewById(TextViewids[swaps2]))
 				.getLocationInWindow(location2);
 
-		Animation animation1 = new TranslateAnimation(0, location1[0]
+		animation1 = new TranslateAnimation(0, location1[0]
 				- location2[0], 0, location1[1] - location2[1]);
 		animation1.setDuration(500);
 		animation1.setZAdjustment(Animation.ZORDER_TOP);
 		((TextView) findViewById(TextViewids[swaps2]))
 				.startAnimation(animation1);
 
-		Animation animation2 = new TranslateAnimation(0, -location1[0]
+		animation2 = new TranslateAnimation(0, -location1[0]
 				+ location2[0], 0, -location1[1] + location2[1]);
 		animation2.setDuration(500);
 		animation2.setZAdjustment(Animation.ZORDER_BOTTOM);
@@ -410,24 +404,6 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		}
 	}
 
-	private Runnable updateTimerThread = new Runnable() {
-
-		public void run() {
-
-			timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-
-			updatedTime = timeSwapBuff + timeInMilliseconds;
-
-			int secs = (int) (updatedTime / 1000);
-			int mins = secs / 60;
-			secs = secs % 60;
-			int milliseconds = (int) (updatedTime % 1000);
-			levelValue.setText("" + mins + ":" + String.format("%02d", secs)
-					+ ":" + String.format("%03d", milliseconds));
-			customHandler.postDelayed(this, 0);
-		}
-
-	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -193,11 +193,11 @@ public class MainActivity extends Activity implements OnClickListener {
 				frm_linear_00.setVisibility(View.GONE);
 
 				l1b1e.setVisibility(View.VISIBLE);
-				//l1b4.setVisibility(View.GONE);
+				l1b4.setVisibility(View.GONE);
 				l2b1.setVisibility(View.VISIBLE);					
 				l2b1e.setVisibility(View.GONE);
 				l1b1.setVisibility(View.GONE);
-				//l2b4.setVisibility(View.GONE);
+				l2b4.setVisibility(View.GONE);
 				Gameid=3;
 				textView.setWidth(textView.getWidth()*2);
 				textView.setHeight(textView.getHeight()*2);

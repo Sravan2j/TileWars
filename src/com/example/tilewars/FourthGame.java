@@ -57,14 +57,6 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 	int swaps = 0;
 	int flipscount = 0;
 
-	long timeInMilliseconds = 0L;
-	long timeSwapBuff = 0L;
-	long updatedTime = 0L;
-	int sleepValue = 600;
-	int maxCells = 1;
-	int userClick = 0;
-	boolean gameover = false;
-
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14,
 			R.id.tv15, R.id.tv16, R.id.tv21, R.id.tv22, R.id.tv23, R.id.tv24,
 			R.id.tv25, R.id.tv26, R.id.tv31, R.id.tv32, R.id.tv33, R.id.tv34,
@@ -102,11 +94,11 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 			R.id.tvb56, R.id.tvb61, R.id.tvb62, R.id.tvb63, R.id.tvb64,
 			R.id.tvb65, R.id.tvb66 };
 
-	int remaining = 0;
-	int count = 0;
 	int swaps1 = 0;
 	int swaps2 = 0;
 	Random rand = new Random();
+	Animation animation1=null;
+	Animation animation2=null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -117,11 +109,12 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		if (android.os.Build.VERSION.SDK_INT <= 10) {
+		/*if (android.os.Build.VERSION.SDK_INT <= 10) {
 			setContentView(R.layout.apilt11_main);
 		} else {
 			setContentView(R.layout.fourth_screen);
-		}
+		}*/
+		setContentView(R.layout.fourth_screen);
 
 		for (int i = 0; i < 36; i++) {
 			final int choiceIndex = i;
@@ -245,19 +238,6 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 								switchHandler.postDelayed(switchRun, 200);			
 							}
 
-							/*chances--;
-							if (chances == 0) {
-								chances = 2;
-								player = player * -1;
-								if (player == 1) {
-									redValue.setTextColor(Color.RED);	
-									blueValue.setTextColor(Color.GRAY);
-								} else if (player == -1) {
-									blueValue.setTextColor(Color.BLUE);
-									redValue.setTextColor(Color.GRAY);
-								}
-							}*/
-
 						}
 					});
 		}
@@ -291,11 +271,11 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 				builder.setMessage("Play against a friend! A good flip activates a chain reaction as bonus points.")
 				.setTitle("Chain Tile Rules");
 				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-			               // User clicked OK button
-			        	   dialog.dismiss();
-			           }
-			       });				
+					public void onClick(DialogInterface dialog, int id) {
+						// User clicked OK button
+						dialog.dismiss();
+					}
+				});				
 				builder.show();
 			}
 
@@ -476,7 +456,7 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 		}
 	};
 
-	
+
 	public void swapAnimation() {
 		swaps1=currentIndex;		
 		swaps2 = rand.nextInt(36);
@@ -509,14 +489,14 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 		((TextView) findViewById(tidSwap2))
 		.getLocationInWindow(location2);
 
-		Animation animation1 = new TranslateAnimation(0, location1[0]
+		animation1 = new TranslateAnimation(0, location1[0]
 				- location2[0], 0, location1[1] - location2[1]);
 		animation1.setDuration(500);
 		animation1.setZAdjustment(Animation.ZORDER_TOP);
 		((TextView) findViewById(tidSwap2))
 		.startAnimation(animation1);
 
-		Animation animation2 = new TranslateAnimation(0, -location1[0]
+		animation2 = new TranslateAnimation(0, -location1[0]
 				+ location2[0], 0, -location1[1] + location2[1]);
 		animation2.setDuration(500);
 		animation2.setZAdjustment(Animation.ZORDER_BOTTOM);

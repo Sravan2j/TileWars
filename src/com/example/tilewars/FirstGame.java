@@ -29,9 +29,6 @@ import com.tekle.oss.android.animation.AnimationFactory;
 import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 
 
-
-
-
 @SuppressLint({ "ShowToast", "NewApi" })
 public class FirstGame extends Activity implements FlipCompleteListener{
 	private TextView startButton;
@@ -52,8 +49,6 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 	String currentGameTimeValue="";
 	int maxTimeMillisVal=0;
 	int currTimeMillisVal=0;
-
-
 
 	private Handler customHandler = new Handler();
 	private Handler flipHandler = new Handler();
@@ -90,7 +85,6 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			R.id.tvb41, R.id.tvb42, R.id.tvb43, R.id.tvb44, R.id.tvb45, R.id.tvb46,
 			R.id.tvb51, R.id.tvb52, R.id.tvb53, R.id.tvb54, R.id.tvb55, R.id.tvb56,
 			R.id.tvb61, R.id.tvb62, R.id.tvb63, R.id.tvb64, R.id.tvb65, R.id.tvb66};
-
 
 
 
