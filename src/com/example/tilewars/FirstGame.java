@@ -42,8 +42,8 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 	long timeSwapBuff = 0L;
 	long updatedTime = 0L;
 	int sleepValue = 600;
-	int maxCells=1;
-	int userClick=0;
+	//int maxCells=1;
+	//int userClick=0;
 	int count=0;
 	String maxTimeValue="";
 	String currentGameTimeValue="";
@@ -130,8 +130,8 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 					update(choiceIndex,-1);
 					AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[choiceIndex]), FlipDirection.LEFT_RIGHT);					
 					//count--;
-					userClick++;
-					if(userClick==50) {maxCells++; userClick=0;}
+					/*userClick++;
+					if(userClick==50) {maxCells++; userClick=0;}*/
 
 				}
 			});			
@@ -203,18 +203,20 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 			Random rand = new Random();
 			int random=0;
-			int cells = rand.nextInt(maxCells)+1;
-			Log.i("cells",cells+"");
-			while(cells>0){
-				cells--;
+			//int cells = rand.nextInt(maxCells)+1;
+			//Log.i("cells",cells+"");
+			//while(cells>0){
+				//cells--;
 
 				random=rand.nextInt(36);
 				while(isFlipped[random]) {random=rand.nextInt(36);} 
 				update(random,1);
 				AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[random]), FlipDirection.LEFT_RIGHT);
 				if (count==10) gameOver();
-			}
-			if (sleepValue>50) sleepValue-=5;
+			//}
+			if (sleepValue>200) sleepValue-=5;
+			else if (sleepValue<201 && sleepValue>50) sleepValue-=2;
+			Log.i("SleepValue",sleepValue+"");
 			if (count<10)
 				flipHandler.postDelayed(flipRun, sleepValue);
 			else gameOver();
@@ -228,8 +230,8 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 		timeSwapBuff = 0L;				
 
-		maxCells = 1;
-		userClick = 0;
+		//maxCells = 1;
+		//userClick = 0;
 		sleepValue = 600;
 		count = 0;
 		int i=0;
@@ -259,8 +261,8 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 					update(choiceIndex,-1);
 					AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[choiceIndex]), FlipDirection.LEFT_RIGHT);					
 					//count--;
-					userClick++;
-					if(userClick==50) {maxCells++; userClick=0;}
+					/*userClick++;
+					if(userClick==50) {maxCells++; userClick=0;}*/
 
 				}
 			});
@@ -271,7 +273,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 	{
 		isFlipped[index] = !isFlipped[index];
 		count+=num;
-
+		//if (count==10) gameOver();
 	}
 
 
