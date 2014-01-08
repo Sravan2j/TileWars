@@ -99,8 +99,10 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	int swaps1 = 0;
 	int swaps2 = 0;
 	Random rand = new Random();
-	//int greenColor = Color.parseColor("#75DB1B");
-	int greenColor = Color.parseColor("#44B71F");
+	int greenColor = Color.parseColor("#75DB1B");
+	//int greenColor = Color.parseColor("#44B71F");
+	int yellowColor = Color.parseColor("#F3D42C");
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +142,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 						public void onClick(View v) {
 							if (isFlipped[choiceIndex]) {
 								((TextView) findViewById(TextViewbids[choiceIndex]))
-										.setBackgroundColor(greenColor);
+										.setBackgroundColor(yellowColor);
 								remaining--;
 								flipscount--;
 							} else {
@@ -236,7 +238,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 			}
 			isFlipped[random] = true;
 			((TextView) findViewById(TextViewbids[random]))
-					.setBackgroundColor(greenColor);
+					.setBackgroundColor(yellowColor);
 			AnimationFactory.flipTransition(
 					(ViewFlipper) findViewById(ViewFlipperids[random]),
 					FlipDirection.LEFT_RIGHT);
