@@ -1,9 +1,9 @@
 TileWars
 ========
 
-TileWars is an Android Mobile Game. This game is inspired by the iOS game "TileWars", developed by Tyler McAtee and Joel Green.
+TileWars is an Android tile flipping game. This game is inspired by the iOS game "TileWars", developed by Tyler McAtee and Joel Green.
 
-TileWars is a tile flipping game with four modes.
+This game has four modes.
 
 1) SpeedTile: Play against the stop watch when Tiles are flipped at an increasing rate. Touch the flipped Tiles to keep playing. Game ends when ten Tiles are flipped before you unflip them.
 
