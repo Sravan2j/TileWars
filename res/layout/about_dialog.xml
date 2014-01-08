@@ -5,7 +5,12 @@
   android:layout_height="fill_parent" android:layout_width="fill_parent">
 	<TextView android:id="@+id/sjsu_logo" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
-		 />
+		android:text="Developer: Sravan Kumar Reddy Javaji\nEmail: sravan2j@gmail.com\n"
+		android:lineSpacingMultiplier="1.4" 
+		android:typeface="serif"
+		android:paddingLeft="5dp"
+		android:paddingRight="5dp"
+		 />	
 
 	<!-- <TextView android:id="@+id/about_developer"
 	    android:layout_below="@id/sjsu_logo"
@@ -24,25 +29,27 @@
 		android:layout_width="fill_parent" android:layout_below="@id/sjsu_logo"
 		android:layout_above="@+id/buttons"
 		android:layout_height="wrap_content">
-		<TextView android:id="@+id/about_dialog_credits"
-		    android:drawableTop="@drawable/sravan"		
+		<TextView android:id="@+id/about_dialog_credits"		    	
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:textColor="#FFFFFF" 
 			android:lineSpacingMultiplier="1.4" 
 			android:text="@string/about_screen_credits"
-			android:paddingLeft="4dp"
+			android:paddingLeft="4dp"			
 			android:paddingRight="4dp" />
 	</ScrollView>
 	 <LinearLayout
             android:id="@+id/buttons"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"            
+            android:orientation="horizontal"    
+            android:gravity="center_horizontal"        
             android:layout_alignParentBottom="true">
        <Button android:id="@+id/about_dialog_okbutton"
+           
 		android:layout_below="@id/about_dialog_scrollview"		
 		android:layout_width="80dip" android:layout_height="wrap_content"
-		android:layout_centerHorizontal="true" android:text="Close" />
+		android:gravity="center_horizontal" android:text="Close"
+		 />
     </LinearLayout>
 	
 </RelativeLayout> 
