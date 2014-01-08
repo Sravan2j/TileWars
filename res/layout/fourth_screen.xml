@@ -1118,7 +1118,8 @@
                 android:id="@+id/blueValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"                               
+                android:gravity="center_horizontal"
+                android:textStyle="bold"                               
                 android:text="@string/blueVal"
                 android:textColor="#001082" />
         </TableRow>
@@ -1134,7 +1135,8 @@
                 android:id="@+id/redValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" 
-                android:gravity="center_horizontal"                         
+                android:gravity="center_horizontal"
+                android:textStyle="bold"                         
                 android:text="@string/redVal"
                 android:textColor="#001082" />
         </TableRow>
@@ -1193,10 +1195,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:drawableTop="@drawable/gearbg"
+                android:drawableTop="@drawable/gearbgbrown"
                 android:gravity="center_horizontal"
                 android:text="Games"
-                android:textColor="#001082" >
+                android:textColor="#808080" >
             </TextView>
         </TableRow>
     </TableLayout>

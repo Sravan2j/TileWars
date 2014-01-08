@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,6 +32,7 @@ import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 
 @SuppressLint({ "ShowToast", "NewApi" })
 public class SecondGame extends Activity implements FlipCompleteListener {
+	private static final int ABOUT_MENUOPTION_ID = Menu.FIRST + 11;
 	private TextView nextButton;
 	private TextView rulesButton;
 
@@ -97,7 +99,8 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	int swaps1 = 0;
 	int swaps2 = 0;
 	Random rand = new Random();
-	int greenColor = Color.parseColor("#75DB1B");
+	//int greenColor = Color.parseColor("#75DB1B");
+	int greenColor = Color.parseColor("#44B71F");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +140,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 						public void onClick(View v) {
 							if (isFlipped[choiceIndex]) {
 								((TextView) findViewById(TextViewbids[choiceIndex]))
-										.setBackgroundColor(Color.GREEN);
+										.setBackgroundColor(greenColor);
 								remaining--;
 								flipscount--;
 							} else {
@@ -164,7 +167,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		maxLevelTV.setText("Max Level : " + maxLevelValue);
 
 		levelValue = (TextView) findViewById(R.id.levelValue);
-		levelValue.setText("Current Level : " + level);
+		levelValue.setText("Levels Completed : " + level);
 		nextButton = (TextView) findViewById(R.id.nextButton);
 		rulesButton = (TextView) findViewById(R.id.rulesButton);
 
@@ -176,10 +179,11 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 					Log.i("enterd reset", "enrteer resret");
 					nextButton.setClickable(false);
 					resetGame();
-					levelValue.setText("Current Level : " + level);
-					nextButton.setText("Next");
+					levelValue.setText("Levels Completed : " + level);
+					nextButton.setText("Start");
 					nextButton.setClickable(true);
 				} else {
+					nextButton.setText("Next");
 					nextButton.setClickable(false);
 					for (int i = 0; i < 36; i++) {
 						isFlipped[i] = false;
@@ -194,8 +198,8 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		rulesButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(SecondGame.this);
-				builder.setMessage("Remember where the tiles were shown.")
-				.setTitle("Memory Tile Rules");
+				builder.setMessage("Remember where the tiles were shown and tap them all to advance to the next round. Don't be fooled when the tiles start swapping positions. \n\nInstructions:\n- START button starts the game. After the game starts, START button changes to NEXT button.\n- click NEXT button after tapping all the correct tiles, to advance to next level.\n- GAMES button takes you to the game selection screen.")
+				.setTitle("MemoryTile Rules");
 				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
 			               // User clicked OK button
@@ -232,7 +236,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 			}
 			isFlipped[random] = true;
 			((TextView) findViewById(TextViewbids[random]))
-					.setBackgroundColor(Color.GREEN);
+					.setBackgroundColor(greenColor);
 			AnimationFactory.flipTransition(
 					(ViewFlipper) findViewById(ViewFlipperids[random]),
 					FlipDirection.LEFT_RIGHT);
@@ -275,7 +279,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 								FlipDirection.LEFT_RIGHT);
 				}
 				level++;
-				levelValue.setText("Current Level : " + level);
+				levelValue.setText("Levels Completed : " + level);
 				if (level > maxLevelValue) {
 					maxLevelValue = level;
 					maxLevelTV.setText("Max Level : " + maxLevelValue);
@@ -404,13 +408,6 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		}
 	}
 
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
 
 	@Override
 	public void flipOutComplete() {
@@ -553,6 +550,30 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		}
 		editor.putInt("TilesSecondGame", maxLevelValue);
 		editor.commit();
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		//getMenuInflater().inflate(R.menu.main, menu);
+		menu.add(0, ABOUT_MENUOPTION_ID, 0,"About").setIcon(R.drawable.about);
+		return true;
+
+	}
+
+	/** Menu Item Click Listener*/
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+
+		case ABOUT_MENUOPTION_ID:
+			DialogPrompt.showAppAboutDialog(this);
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+
 	}
 
 }

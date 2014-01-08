@@ -1115,30 +1115,31 @@
     </com.example.tilewars.SquareLayout>
 
 
-   
-    
+
     <TableLayout
         android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"        
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        
         android:paddingBottom="4dp"
         android:stretchColumns="1" >
 
         <TableRow
             android:id="@+id/tableRow0"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"            
             android:gravity="center_horizontal"
-            android:paddingBottom="10dp" >
+            android:paddingBottom="20dp" >
 
             <TextView
-                android:id="@+id/maxLevelValue"
+                android:id="@+id/maxTimerValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"                               
-                android:text="@string/maxLevelVal"
+                android:text="@string/timerVal"
+                android:textSize="30sp"
                 android:textColor="#001082" />
         </TableRow>
         
@@ -1147,14 +1148,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:paddingBottom="10dp" >
+            android:paddingBottom="20dp" >
 
             <TextView
-                android:id="@+id/levelValue"
+                android:id="@+id/timerValue"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
-                android:gravity="center_horizontal"                         
-                android:text="@string/levelVal"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"                          
+                android:text="@string/timerVal"
+                android:textSize="30sp"
                 android:textColor="#001082" />
         </TableRow>
 
@@ -1162,18 +1164,19 @@
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp" >
+            android:paddingBottom="25dp"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp" >
 
             <TextView
-                android:id="@+id/nextButton"
+                android:id="@+id/startButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:gravity="center_horizontal"
                 android:text="Start"
+                android:textSize="30sp"
                 android:textColor="#001082" >
             </TextView>
 
@@ -1185,6 +1188,7 @@
                 android:clickable="true"
                 android:gravity="center_horizontal"
                 android:text="Rules"
+                android:textSize="30sp"
                 android:textColor="#001082" >
             </TextView>
         </TableRow>
@@ -1203,6 +1207,7 @@
                 android:drawableTop="@drawable/playbg"
                 android:gravity="center_horizontal"
                 android:text="Play"
+                android:textSize="30sp"
                 android:textColor="#001082" >
             </TextView>
 
@@ -1215,10 +1220,10 @@
                 android:drawableTop="@drawable/gearbgbrown"
                 android:gravity="center_horizontal"
                 android:text="Games"
+                android:textSize="30sp"
                 android:textColor="#808080" >
             </TextView>
         </TableRow>
     </TableLayout>
-    
-    
+
 </RelativeLayout>

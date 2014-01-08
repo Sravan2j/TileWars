@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,6 +28,7 @@ import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 @SuppressLint({ "ShowToast", "NewApi" })
 public class FourthGame extends Activity implements FlipCompleteListener {
 	private TextView resetButton;
+	private static final int ABOUT_MENUOPTION_ID = Menu.FIRST + 11;
 
 	private TextView rulesButton;	
 	private TextView redValue;
@@ -284,8 +286,8 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 		rulesButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(FourthGame.this);
-				builder.setMessage("Play against a friend! A good flip activates a chain reaction as bonus points.")
-				.setTitle("Chain Tile Rules");
+				builder.setMessage("Play against a friend! You can flip any grey tile to your color and doing so flips all bordering tiles (except grey tiles) to your color. Take one turn each and try to get the most tiles. A good flip activates a chain reaction as bonus.\n\nInstructions:\n- Highlighted score lets you know whose the current turn is !\n- RESET button resets the game.\n- GAMES button takes you to the game selection screen.")
+				.setTitle("ChainTile Rules");
 				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						// User clicked OK button
@@ -574,13 +576,6 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
 	public void flipOutComplete() {
 
 
@@ -591,6 +586,30 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 	@Override
 	public void flipInComplete() {
 		// TODO Auto-generated method stub
+
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		//getMenuInflater().inflate(R.menu.main, menu);
+		menu.add(0, ABOUT_MENUOPTION_ID, 0,"About").setIcon(R.drawable.about);
+		return true;
+
+	}
+
+	/** Menu Item Click Listener*/
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+
+		case ABOUT_MENUOPTION_ID:
+			DialogPrompt.showAppAboutDialog(this);
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 
 	}
 

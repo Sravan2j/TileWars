@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,6 +32,7 @@ import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 
 @SuppressLint({ "ShowToast", "NewApi" })
 public class FirstGame extends Activity implements FlipCompleteListener{
+	private static final int ABOUT_MENUOPTION_ID = Menu.FIRST + 11;
 	private TextView startButton;
 	private TextView rulesButton;
 
@@ -102,7 +104,7 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		}
 		else
 		{*/
-			setContentView(R.layout.first_screen);
+		setContentView(R.layout.first_screen);
 		//}
 
 		loadSavedPreferences();
@@ -114,14 +116,14 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			public void onClick(View v) {
 
 				Intent intent = new Intent(FirstGame.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
 				startActivity(intent);
 			}
 		});
-		
-		
-		
+
+
+
 		for (int i=0;i<36;i++)
 		{		
 			final int choiceIndex = i;			
@@ -140,7 +142,10 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 
 		timerValue = (TextView) findViewById(R.id.timerValue);
 		maxTimerTV = (TextView) findViewById(R.id.maxTimerValue);
-		maxTimerTV.setText(maxTimeValue);
+		if (maxTimeValue!="")
+			maxTimerTV.setText("Max Time : "+maxTimeValue);
+		else
+			maxTimerTV.setText("");	
 
 		startButton = (TextView) findViewById(R.id.startButton);
 		rulesButton = (TextView) findViewById(R.id.rulesButton);
@@ -148,19 +153,19 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		rulesButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(FirstGame.this);
-				builder.setMessage("Play against the computer who is flipping tiles faster and faster")
-				.setTitle("Speed Tile Rules");
+				builder.setMessage("Play against the computer who is flipping tiles faster and faster.\nGame ends if you miss ten flips!\n\nInstructions:\n- START button starts the game. After the game starts, START button changes to RESET button.\n- RESET button resets the game.\n- GAMES button takes you to the game selection screen.")
+				.setTitle("SpeedTile Rules");
 				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-			               // User clicked OK button
-			        	   dialog.dismiss();
-			           }
-			       });				
+					public void onClick(DialogInterface dialog, int id) {
+						// User clicked OK button
+						dialog.dismiss();
+					}
+				});				
 				builder.show();
 			}
 
 		});
-		
+
 		startButton.setOnClickListener(new View.OnClickListener() {
 
 
@@ -206,13 +211,13 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			//int cells = rand.nextInt(maxCells)+1;
 			//Log.i("cells",cells+"");
 			//while(cells>0){
-				//cells--;
+			//cells--;
 
-				random=rand.nextInt(36);
-				while(isFlipped[random]) {random=rand.nextInt(36);} 
-				update(random,1);
-				AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[random]), FlipDirection.LEFT_RIGHT);
-				if (count==10) gameOver();
+			random=rand.nextInt(36);
+			while(isFlipped[random]) {random=rand.nextInt(36);} 
+			update(random,1);
+			AnimationFactory.flipTransition((ViewFlipper)findViewById(ViewFlipperids[random]), FlipDirection.LEFT_RIGHT);
+			if (count==10) gameOver();
 			//}
 			if (sleepValue>200) sleepValue-=5;
 			else if (sleepValue<201 && sleepValue>50) sleepValue-=2;
@@ -296,15 +301,6 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		}
 
 	};
-
-
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
 
 
 
@@ -402,10 +398,11 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 			maxTimeMillisVal=currTimeMillisVal;
 			maxTimeValue=currentGameTimeValue;
 			maxTimerTV.setText(maxTimeValue);
+			maxTimerTV.setText("Max Time : "+maxTimeValue);
 		}
 
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
@@ -435,6 +432,31 @@ public class FirstGame extends Activity implements FlipCompleteListener{
 		}	
 		editor.putString("TilesFirstGame", maxTimeValue);
 		editor.commit();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		//getMenuInflater().inflate(R.menu.main, menu);
+		menu.add(0, ABOUT_MENUOPTION_ID, 0,"About").setIcon(R.drawable.about);
+		return true;
+
+	}
+
+	/** Menu Item Click Listener*/
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+
+		case ABOUT_MENUOPTION_ID:
+			DialogPrompt.showAppAboutDialog(this);
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+
 	}
 
 }

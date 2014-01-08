@@ -1131,7 +1131,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:paddingBottom="10dp" >
+            android:paddingBottom="15dp" >
 
             <TextView
                 android:id="@+id/maxLevelValue"
@@ -1139,6 +1139,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"                               
                 android:text="@string/maxLevelVal"
+                android:textSize="20sp"
                 android:textColor="#001082" />
         </TableRow>
         
@@ -1147,7 +1148,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:paddingBottom="10dp" >
+            android:paddingBottom="15dp" >
 
             <TextView
                 android:id="@+id/levelValue"
@@ -1155,6 +1156,7 @@
                 android:layout_height="wrap_content" 
                 android:gravity="center_horizontal"                         
                 android:text="@string/levelVal"
+                android:textSize="20sp"
                 android:textColor="#001082" />
         </TableRow>
 
@@ -1162,9 +1164,9 @@
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp" >
+            android:paddingBottom="20dp"
+            android:paddingLeft="45dp"
+            android:paddingRight="45dp" >
 
             <TextView
                 android:id="@+id/nextButton"
@@ -1174,6 +1176,7 @@
                 android:clickable="true"
                 android:gravity="center_horizontal"
                 android:text="Start"
+                android:textSize="20sp"
                 android:textColor="#001082" >
             </TextView>
 
@@ -1185,6 +1188,7 @@
                 android:clickable="true"
                 android:gravity="center_horizontal"
                 android:text="Rules"
+                android:textSize="20sp"
                 android:textColor="#001082" >
             </TextView>
         </TableRow>
@@ -1203,6 +1207,7 @@
                 android:drawableTop="@drawable/playbg"
                 android:gravity="center_horizontal"
                 android:text="Play"
+                android:textSize="20sp"
                 android:textColor="#001082" >
             </TextView>
 
@@ -1215,6 +1220,7 @@
                 android:drawableTop="@drawable/gearbgbrown"
                 android:gravity="center_horizontal"
                 android:text="Games"
+                android:textSize="20sp"
                 android:textColor="#808080" >
             </TextView>
         </TableRow>

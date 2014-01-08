@@ -3,14 +3,16 @@ package com.example.tilewars;
 
 import android.animation.Animator;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -89,6 +91,19 @@ public class MainActivity extends Activity implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if(Gameid==0){
+					//Toast.makeText(MainActivity.this, "Please select a TILE out of those four tiles. Then Click 'Play'.", Toast.LENGTH_SHORT).show();
+					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+					builder.setMessage("Please select a TILE among four tiles. Then Click 'Play'.")
+					.setTitle("Select a Game");
+					builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				               // User clicked OK button
+				        	   dialog.dismiss();
+				           }
+				       });				
+					builder.show();
+				}
 				if(Gameid==1){
 					Intent intent = new Intent(MainActivity.this, FirstGame.class);                                    
 					startActivity(intent);
@@ -226,7 +241,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	Runnable animOver = new Runnable() {
 		@Override
 		public void run() {
-			gameId.setText("Game "+Gameid);
+			if(Gameid==1)
+			gameId.setText("SpeedTile Game");
+			if(Gameid==2)
+				gameId.setText("MemoryTile Game");
+			if(Gameid==3)
+				gameId.setText("FlipTile Game");
+			if(Gameid==4)
+				gameId.setText("ChainTile Game");
 		}
 	};
 

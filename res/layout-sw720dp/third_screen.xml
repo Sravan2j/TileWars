@@ -428,16 +428,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#808080"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/tvb32"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
             </ViewFlipper>
 
             <View
@@ -457,16 +455,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#808080"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/tvb33"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
             </ViewFlipper>
 
             <View
@@ -486,16 +482,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#808080"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/tvb34"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
             </ViewFlipper>
 
             <View
@@ -515,16 +509,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#808080"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/tvb35"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
             </ViewFlipper>
 
             <View
@@ -616,16 +608,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#808080"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/tvb42"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
             </ViewFlipper>
 
             <View
@@ -645,16 +635,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#808080"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/tvb43"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
             </ViewFlipper>
 
             <View
@@ -674,16 +662,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#808080"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/tvb44"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
             </ViewFlipper>
 
             <View
@@ -703,16 +689,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#808080"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/tvb45"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#BC0001"
-                    android:gravity="center"
-                    android:textColor="#4374E0" />
+                    android:gravity="center" />
             </ViewFlipper>
 
             <View
@@ -1115,8 +1099,8 @@
     </com.example.tilewars.SquareLayout>
 
 
-   
-    
+
+
     <TableLayout
         android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
@@ -1131,14 +1115,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:paddingBottom="10dp" >
+            android:paddingBottom="20dp" >
 
             <TextView
-                android:id="@+id/maxLevelValue"
+                android:id="@+id/blueValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"                               
-                android:text="@string/maxLevelVal"
+                android:text="@string/blueVal"
+                android:textStyle="bold"
+                android:textSize="30sp"
                 android:textColor="#001082" />
         </TableRow>
         
@@ -1147,14 +1133,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:paddingBottom="10dp" >
+            android:paddingBottom="20dp" >
 
             <TextView
-                android:id="@+id/levelValue"
+                android:id="@+id/redValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" 
                 android:gravity="center_horizontal"                         
-                android:text="@string/levelVal"
+                android:text="@string/redVal"
+                android:textStyle="bold"
+                android:textSize="30sp"
                 android:textColor="#001082" />
         </TableRow>
 
@@ -1162,18 +1150,19 @@
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp" >
+            android:paddingBottom="25dp"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp" >
 
             <TextView
-                android:id="@+id/nextButton"
+                android:id="@+id/resetButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:gravity="center_horizontal"
-                android:text="Start"
+                android:text="@string/resetButtonLabel"
+                android:textSize="30sp"
                 android:textColor="#001082" >
             </TextView>
 
@@ -1185,6 +1174,7 @@
                 android:clickable="true"
                 android:gravity="center_horizontal"
                 android:text="Rules"
+                android:textSize="30sp"
                 android:textColor="#001082" >
             </TextView>
         </TableRow>
@@ -1203,6 +1193,7 @@
                 android:drawableTop="@drawable/playbg"
                 android:gravity="center_horizontal"
                 android:text="Play"
+                android:textSize="30sp"
                 android:textColor="#001082" >
             </TextView>
 
@@ -1215,10 +1206,9 @@
                 android:drawableTop="@drawable/gearbgbrown"
                 android:gravity="center_horizontal"
                 android:text="Games"
+                android:textSize="30sp"
                 android:textColor="#808080" >
             </TextView>
         </TableRow>
     </TableLayout>
-    
-    
 </RelativeLayout>
