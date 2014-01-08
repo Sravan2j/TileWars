@@ -5,7 +5,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <com.example.tilewars.SquareLayout
+    <com.games.tilewars.SquareLayout
         android:id="@+id/sqlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -1112,7 +1112,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
-    </com.example.tilewars.SquareLayout>
+    </com.games.tilewars.SquareLayout>
 
 
    

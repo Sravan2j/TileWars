@@ -1,4 +1,4 @@
-package com.example.tilewars;
+package com.games.tilewars;
 
 import java.util.Random;
 
@@ -16,30 +16,35 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.games.tilewars.R;
 import com.tekle.oss.android.animation.AnimationFactory;
 import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 
 @SuppressLint({ "ShowToast", "NewApi" })
-public class ThirdGame extends Activity implements FlipCompleteListener {
-	private static final int ABOUT_MENUOPTION_ID = Menu.FIRST + 11;
+public class FourthGame extends Activity implements FlipCompleteListener {
 	private TextView resetButton;
-	private TextView rulesButton;
+	private static final int ABOUT_MENUOPTION_ID = Menu.FIRST + 11;
 
+	private TextView rulesButton;	
 	private TextView redValue;
 	private TextView blueValue;
 
-
 	private Handler switchHandler = new Handler();
+	private Handler swapHandler = new Handler();	
 
-
+	int currentIndex = 0;
 	int cnt = 0;
 	int oppCnt = 0;
+	int chainCnt = 0;
 	int redCount = 0;
 	int blueCount = 0;
-	int chances = 2;
+	int chances = 1;
 	int player = -1;
 	int otherPlayer = 1;
 	int tileColor = 0;
@@ -55,15 +60,6 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 	int level = 0;
 	int swaps = 0;
 	int flipscount = 0;
-
-	long timeInMilliseconds = 0L;
-	long timeSwapBuff = 0L;
-	long updatedTime = 0L;
-	int sleepValue = 600;
-	int maxCells = 1;
-	int userClick = 0;
-	//boolean computer = true;
-	boolean gameover = false;
 
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14,
 			R.id.tv15, R.id.tv16, R.id.tv21, R.id.tv22, R.id.tv23, R.id.tv24,
@@ -102,11 +98,11 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 			R.id.tvb56, R.id.tvb61, R.id.tvb62, R.id.tvb63, R.id.tvb64,
 			R.id.tvb65, R.id.tvb66 };
 
-	int remaining = 0;
-	int count = 0;
 	int swaps1 = 0;
 	int swaps2 = 0;
 	Random rand = new Random();
+	Animation animation1=null;
+	Animation animation2=null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -120,17 +116,18 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		/*if (android.os.Build.VERSION.SDK_INT <= 10) {
 			setContentView(R.layout.apilt11_main);
 		} else {
-			setContentView(R.layout.third_screen);
+			setContentView(R.layout.fourth_screen);
 		}*/
-		setContentView(R.layout.third_screen);
-
+		setContentView(R.layout.fourth_screen);
+		
+		
 		TextView games = (TextView) findViewById(R.id.games);
 		games.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 
-				Intent intent = new Intent(ThirdGame.this, MainActivity.class);
+				Intent intent = new Intent(FourthGame.this, MainActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
 				startActivity(intent);
@@ -143,14 +140,14 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 			findViewById(TextViewids[i]).setOnClickListener(
 					new View.OnClickListener() {
 						public void onClick(View v) {
-							
 
 							for (int k = 0; k < 36; k++) {
-								if (cardColor[k]==0)(findViewById(TextViewids[k])).setClickable(false);
+								((TextView) findViewById(TextViewids[k]))
+								.setClickable(false);
 							}
-							
 							cnt = 0;
 							oppCnt=0;
+							chainCnt = 0;
 							if (player == 1) {
 								tileColor = Color.RED;
 							} else if (player == -1) {
@@ -245,12 +242,25 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 							}
 							redValue.setText("Red Count : " + redCount);
 							blueValue.setText("Blue Count : " + blueCount);
-							switchHandler.postDelayed(switchRun, 200);
+
+							chainCnt = cnt-3;
+							if (chainCnt>0)
+							{
+								currentIndex=choiceIndex;
+								swapHandler.postDelayed(swapRun, 1000);
+
+
+								//chainReaction(choiceIndex);
+							}
+							else
+							{								
+								switchHandler.postDelayed(switchRun, 200);			
+							}
 
 						}
 					});
 		}
-		
+
 		redValue = (TextView) findViewById(R.id.redValue);
 		redValue.setText("Red Score : " + redCount);
 
@@ -259,36 +269,155 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		blueValue.setTextColor(Color.BLUE);
 		redValue.setTextColor(Color.GRAY);
 		resetButton = (TextView) findViewById(R.id.resetButton);
-		rulesButton = (TextView) findViewById(R.id.rulesButton);
-		rulesButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(ThirdGame.this);
-				builder.setMessage("Play against a friend! You can flip any grey tile to your color and doing so flips all bordering tiles (except grey tiles) to your color. Take two turns each and try to get the most tiles.\n\nInstructions:\n- Highlighted score lets you know whose the current turn is !\n- RESET button resets the game.\n- GAMES button takes you to the game selection screen.")
-				.setTitle("FlipTile Rules");
-				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-			               // User clicked OK button
-			        	   dialog.dismiss();
-			           }
-			       });				
-				builder.show();
-			}
 
-		});
-		
+
 		resetButton.setOnClickListener(new View.OnClickListener() {
 
-			public void onClick(View view) {
+			public void onClick(View view) {								
 				resetButton.setClickable(false);
 				resetGame();
 				redValue.setText("Red Score : " + redCount);
 				blueValue.setText("Blue Score : " + blueCount);								
-				resetButton.setClickable(true);				
+				resetButton.setClickable(true);			
+			}
+		});
+
+		rulesButton = (TextView) findViewById(R.id.rulesButton);
+
+		rulesButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(FourthGame.this);
+				builder.setMessage("Play against a friend! You can flip any grey tile to your color and doing so flips all bordering tiles (except grey tiles) to your color. Take one turn each and try to get the most tiles. A good flip activates a chain reaction as bonus.\n\nInstructions:\n- Highlighted score lets you know whose the current turn is !\n- RESET button resets the game.\n- GAMES button takes you to the game selection screen.")
+				.setTitle("ChainTile Rules");
+				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						// User clicked OK button
+						dialog.dismiss();
+					}
+				});				
+				builder.show();
 			}
 
 		});
 
+
 	}
+
+
+	public void chainReaction(int choiceIndex){
+
+		chainCnt--;
+		cnt = 0;
+		oppCnt=0;
+		if (player == 1) {
+			tileColor = Color.RED;
+		} else if (player == -1) {
+			tileColor = Color.BLUE;
+		}
+
+		if (isFlipped[choiceIndex]) {
+			((TextView) findViewById(TextViewids[choiceIndex]))
+			.setBackgroundColor(tileColor);
+			((TextView) findViewById(TextViewids[choiceIndex]))
+			.setClickable(false);
+		} else {
+			((TextView) findViewById(TextViewbids[choiceIndex]))
+			.setBackgroundColor(tileColor);
+			((TextView) findViewById(TextViewbids[choiceIndex]))
+			.setClickable(false);
+		}
+		AnimationFactory
+		.flipTransition(
+				(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
+				FlipDirection.LEFT_RIGHT);
+
+		isFlipped[choiceIndex] = !isFlipped[choiceIndex];
+		cardColor[choiceIndex] = player;
+		//cnt++;
+
+		otherPlayer = player * -1;
+
+		neighbour4 = choiceIndex - 1;
+		if (choiceIndex % 6 != 0) {
+			if (cardColor[neighbour4] == otherPlayer) {
+				FlipTiles(neighbour4);
+			}
+			neighbour1 = neighbour4 - 6;
+			if (neighbour1 > -1
+					&& cardColor[neighbour1] == otherPlayer) {
+
+				FlipTiles(neighbour1);
+			}
+			neighbour6 = neighbour4 + 6;
+			if (neighbour6 < 36
+					&& cardColor[neighbour6] == otherPlayer) {
+
+				FlipTiles(neighbour6);
+			}
+
+		}
+
+		neighbour5 = choiceIndex + 1;
+		if (neighbour5 % 6 != 0) {
+			if (cardColor[neighbour5] == otherPlayer) {
+
+				FlipTiles(neighbour5);
+			}
+
+			neighbour3 = neighbour5 - 6;
+
+			if (neighbour3 > -1
+					&& cardColor[neighbour3] == otherPlayer) {
+
+				FlipTiles(neighbour3);
+			}
+			neighbour8 = neighbour5 + 6;
+			if (neighbour8 < 36
+					&& cardColor[neighbour8] == otherPlayer) {
+
+				FlipTiles(neighbour8);
+			}
+		}
+
+		neighbour2 = choiceIndex - 6;
+		if (neighbour2 > -1
+				&& cardColor[neighbour2] == otherPlayer) {
+
+			FlipTiles(neighbour2);
+		}
+		neighbour7 = choiceIndex + 6;
+		if (neighbour7 < 36
+				&& cardColor[neighbour7] == otherPlayer) {
+
+			FlipTiles(neighbour7);
+		}
+
+		if (player == 1) {
+			redCount += cnt;
+			blueCount +=oppCnt;
+
+		} else if (player == -1) {
+			blueCount += cnt;
+			redCount +=oppCnt;
+
+		}
+		redValue.setText("Red Count : " + redCount);
+		blueValue.setText("Blue Count : " + blueCount);
+
+		if (chainCnt>0)
+		{
+			currentIndex=choiceIndex;
+			swapHandler.postDelayed(swapRun, 1000);
+			//chainReaction(choiceIndex);
+		}
+		else
+		{
+			switchHandler.postDelayed(switchRun, 200);			
+		}
+
+
+	}
+
 
 	public void FlipTiles(int index) {
 		if (isFlipped[index]) {
@@ -311,12 +440,28 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 	}
 
 
+	Runnable swapRun = new Runnable() {
+		@Override
+		public void run() {
+			swapAnimation();
+		}
+	};
+
+
 	Runnable switchRun = new Runnable() {
 		@Override
-		public void run() {								
+		public void run() {
+
+			for (int k = 0; k < 36; k++) {
+				if(cardColor[k]==0){
+					((TextView) findViewById(TextViewids[k]))
+					.setClickable(true);
+				}
+			}
+
 			chances--;
 			if (chances == 0) {
-				chances = 2;
+				chances = 1;
 				player = player * -1;
 				if (player == 1) {
 					redValue.setTextColor(Color.RED);	
@@ -326,30 +471,98 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 					redValue.setTextColor(Color.GRAY);
 				}
 			}
-			for (int k = 0; k < 36; k++) {
-				if (cardColor[k]==0)(findViewById(TextViewids[k])).setClickable(true);
-			}
 
 		}
 	};
 
-	
+
+	public void swapAnimation() {
+		swaps1=currentIndex;		
+		swaps2 = rand.nextInt(36);
+		while (swaps1 == swaps2 || cardColor[swaps2]!=player) {
+			swaps2 = rand.nextInt(36);
+		}
+
+		int tidSwap1=-1;
+		if(isFlipped[swaps1])
+		{		
+			tidSwap1=TextViewbids[swaps1];
+		}
+		else{
+			tidSwap1=TextViewids[swaps1];
+		}
+
+		int tidSwap2=-1;
+		if(isFlipped[swaps2])
+		{		
+			tidSwap2=TextViewbids[swaps2];
+		}
+		else{
+			tidSwap2=TextViewids[swaps2];
+		}
+
+
+		((TextView) findViewById(tidSwap1))
+		.getLocationInWindow(location1);
+
+		((TextView) findViewById(tidSwap2))
+		.getLocationInWindow(location2);
+
+		animation1 = new TranslateAnimation(0, location1[0]
+				- location2[0], 0, location1[1] - location2[1]);
+		animation1.setDuration(500);
+		animation1.setZAdjustment(Animation.ZORDER_TOP);
+		((TextView) findViewById(tidSwap2))
+		.startAnimation(animation1);
+
+		animation2 = new TranslateAnimation(0, -location1[0]
+				+ location2[0], 0, -location1[1] + location2[1]);
+		animation2.setDuration(500);
+		animation2.setZAdjustment(Animation.ZORDER_BOTTOM);
+
+		animation2.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				// TODO Auto-generated method stub				
+				chainReaction(swaps2);
+
+			}
+		});
+
+		((TextView) findViewById(tidSwap1))
+		.startAnimation(animation2);
+
+	}
+
 	public void resetGame() {
+		swapHandler.removeCallbacks(swapRun);
+		switchHandler.removeCallbacks(switchRun);
 		redCount=0;
 		blueCount=0;
-		chances = 2;
+		chances = 1;
 		player = -1;
 		otherPlayer = 1;
-				
 		for (int i = 0;i < 36;i++) {
 			//final int choiceIndex = i;
 			((TextView) findViewById(TextViewids[i]))
 			.setBackgroundColor(Color.parseColor("#808080"));
-			
+
 			if (isFlipped[i]) {
-				
-					((TextView) findViewById(TextViewbids[i]))
-					.setBackgroundColor(Color.parseColor("#BC0001"));									
+
+				((TextView) findViewById(TextViewbids[i]))
+				.setBackgroundColor(Color.parseColor("#BC0001"));									
 				AnimationFactory
 				.flipTransition(
 						(ViewFlipper) findViewById(ViewFlipperids[i]),
@@ -362,8 +575,10 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		}
 	}
 
+
 	@Override
 	public void flipOutComplete() {
+
 
 		// TODO Auto-generated method stub
 

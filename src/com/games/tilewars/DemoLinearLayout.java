@@ -1,4 +1,4 @@
-package com.example.tilewars;
+package com.games.tilewars;
 
 import android.content.Context;
 import android.util.AttributeSet;

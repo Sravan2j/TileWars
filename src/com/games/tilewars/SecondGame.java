@@ -1,4 +1,4 @@
-package com.example.tilewars;
+package com.games.tilewars;
 
 import java.util.Random;
 
@@ -27,6 +27,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.games.tilewars.R;
 import com.tekle.oss.android.animation.AnimationFactory;
 import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 

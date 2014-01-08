@@ -1,5 +1,7 @@
-package com.example.tilewars;
+package com.games.tilewars;
 
+
+import com.games.tilewars.R;
 
 import android.animation.Animator;
 import android.app.Activity;

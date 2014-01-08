@@ -32,7 +32,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ViewAnimator;
 
-import com.example.tilewars.FlipCompleteListener;
+import com.games.tilewars.FlipCompleteListener;
 
 /**
  * This class contains methods for creating {@link Animation} objects for some of the most common animation, including a 3D flip animation, {@link FlipAnimation}.

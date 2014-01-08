@@ -34,7 +34,7 @@
         </TableRow>
     </TableLayout>
 
-    <com.example.tilewars.DemoLinearLayout
+    <com.games.tilewars.DemoLinearLayout
         android:id="@+id/demoLinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -191,7 +191,7 @@
                 android:layout_height="0dp" />
         </LinearLayout>
         
-    </com.example.tilewars.DemoLinearLayout>
+    </com.games.tilewars.DemoLinearLayout>
 
     <TableLayout
         android:layout_width="match_parent"

@@ -1,4 +1,6 @@
-package com.example.tilewars;
+package com.games.tilewars;
+
+import com.games.tilewars.R;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

@@ -1,4 +1,4 @@
-package com.example.tilewars;
+package com.games.tilewars;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
