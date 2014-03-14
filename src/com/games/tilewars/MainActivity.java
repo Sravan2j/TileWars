@@ -9,6 +9,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -33,6 +35,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	TextView t3 = null;
 	TextView t4 = null;
 	TextView gameId = null;
+	MediaPlayer mplayer;
 
 	View l1b1=null;
 	View l1b1e=null;
@@ -93,6 +96,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				PlaySound(R.raw.menuclick);
 				if(Gameid==0){
 					//Toast.makeText(MainActivity.this, "Please select a TILE out of those four tiles. Then Click 'Play'.", Toast.LENGTH_SHORT).show();
 					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -161,6 +165,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		if ((view instanceof TextView) && (!view.equals(viewvar)))  {
+			
 			final TextView textView = (TextView) view;
 			if (viewvar!=null)
 			{
@@ -184,6 +189,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				Gameid=1;
 				textView.setWidth(textView.getWidth()*2);
 				textView.setHeight(textView.getHeight()*2);
+				PlaySound(R.raw.tileclick);
 
 			}
 
@@ -202,6 +208,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				t1.setLayoutParams(params); //causes layout update */
 				textView.setWidth(textView.getWidth()*2);
 				textView.setHeight(textView.getHeight()*2);
+				//PlaySound(R.raw.tileclick);
 			}
 
 
@@ -218,7 +225,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				Gameid=3;
 				textView.setWidth(textView.getWidth()*2);
 				textView.setHeight(textView.getHeight()*2);
-
+				PlaySound(R.raw.tileclick);
 			}
 
 			if (textView==t4)
@@ -233,7 +240,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				Gameid=4;
 				textView.setWidth(textView.getWidth()*2);
 				textView.setHeight(textView.getHeight()*2);
-
+				//PlaySound(R.raw.tileclick);
 			}
 			animOverHandler.postDelayed(animOver, 300);
 			//gameId.setText("Game "+Gameid);
@@ -243,14 +250,19 @@ public class MainActivity extends Activity implements OnClickListener {
 	Runnable animOver = new Runnable() {
 		@Override
 		public void run() {
+			
 			if(Gameid==1)
 			gameId.setText("SpeedTile Game");
-			if(Gameid==2)
-				gameId.setText("MemoryTile Game");
+			if(Gameid==2){
+				PlaySound(R.raw.tileclick);		
+				gameId.setText("MemoryTile Game");				
+			}
 			if(Gameid==3)
-				gameId.setText("FlipTile Game");
-			if(Gameid==4)
+				gameId.setText("FlipTile Game");						
+			if(Gameid==4){				
+				PlaySound(R.raw.tileclick);
 				gameId.setText("ChainTile Game");
+			}
 		}
 	};
 
@@ -273,6 +285,21 @@ public class MainActivity extends Activity implements OnClickListener {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+
+	}
+	private void PlaySound(int Sound_id) {
+		mplayer = MediaPlayer.create(MainActivity.this, Sound_id);
+		if (mplayer != null) {
+			mplayer.start();
+		}
+		mplayer.setOnCompletionListener(new OnCompletionListener() {
+
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				mp.release();
+			}
+
+		});
 
 	}
 

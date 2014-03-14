@@ -9,8 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +22,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.games.tilewars.R;
 import com.tekle.oss.android.animation.AnimationFactory;
 import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 
@@ -32,9 +34,9 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 	private TextView redValue;
 	private TextView blueValue;
 
-
+	private Handler gameOverHandler = new Handler();
 	private Handler switchHandler = new Handler();
-
+	MediaPlayer mplayer;
 
 	int cnt = 0;
 	int oppCnt = 0;
@@ -63,6 +65,7 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 	int sleepValue = 600;
 	int maxCells = 1;
 	int userClick = 0;
+	int greenColor = Color.parseColor("#75DB1B");
 	//boolean computer = true;
 	boolean gameover = false;
 
@@ -103,7 +106,7 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 			R.id.tvb56, R.id.tvb61, R.id.tvb62, R.id.tvb63, R.id.tvb64,
 			R.id.tvb65, R.id.tvb66 };
 
-	int remaining = 0;
+	int remaining = 36;
 	int count = 0;
 	int swaps1 = 0;
 	int swaps2 = 0;
@@ -130,7 +133,7 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 
 			@Override
 			public void onClick(View v) {
-
+				PlaySound(R.raw.menuclick);
 				Intent intent = new Intent(ThirdGame.this, MainActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
@@ -143,13 +146,13 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 			final int choiceIndex = i;
 			findViewById(TextViewids[i]).setOnClickListener(
 					new View.OnClickListener() {
-						public void onClick(View v) {
-							
-
+						public void onClick(View v) {							
+							PlaySound(R.raw.comedy_pop_finger_in_mouth_002);
+							remaining--;
 							for (int k = 0; k < 36; k++) {
 								if (cardColor[k]==0)(findViewById(TextViewids[k])).setClickable(false);
 							}
-							
+
 							cnt = 0;
 							oppCnt=0;
 							if (player == 1) {
@@ -247,11 +250,15 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 							redValue.setText("Red Count : " + redCount);
 							blueValue.setText("Blue Count : " + blueCount);
 							switchHandler.postDelayed(switchRun, 200);
-
+							if(remaining==0)
+							{
+								gameOverHandler.postDelayed(gameOverRun, 600);
+								//gameOver();
+							}
 						}
 					});
 		}
-		
+
 		redValue = (TextView) findViewById(R.id.redValue);
 		redValue.setText("Red Score : " + redCount);
 
@@ -267,16 +274,16 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 				builder.setMessage("Play against a friend! You can flip any grey tile to your color and doing so flips all bordering tiles (except grey tiles) to your color. Take two turns each and try to get the most tiles.\n\nInstructions:\n- Highlighted score lets you know whose the current turn is !\n- RESET button resets the game.\n- GAMES button takes you to the game selection screen.")
 				.setTitle("FlipTile Rules");
 				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-			               // User clicked OK button
-			        	   dialog.dismiss();
-			           }
-			       });				
+					public void onClick(DialogInterface dialog, int id) {
+						// User clicked OK button
+						dialog.dismiss();
+					}
+				});				
 				builder.show();
 			}
 
 		});
-		
+
 		resetButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {
@@ -334,23 +341,27 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		}
 	};
 
-	
+
 	public void resetGame() {
+		remaining=36;
 		redCount=0;
 		blueCount=0;
 		chances = 2;
 		player = -1;
 		otherPlayer = 1;
-				
+
 		for (int i = 0;i < 36;i++) {
 			//final int choiceIndex = i;
 			((TextView) findViewById(TextViewids[i]))
 			.setBackgroundColor(Color.parseColor("#808080"));
-			
-			if (isFlipped[i]) {
-				
-					((TextView) findViewById(TextViewbids[i]))
-					.setBackgroundColor(Color.parseColor("#BC0001"));									
+
+			if ((i > 12 && i < 17) || (i > 18 && i < 23)) {
+				((TextView) findViewById(TextViewbids[i])).setText("");
+				((TextView) findViewById(TextViewids[i])).setText("");
+			}
+			if (isFlipped[i]) {				
+				((TextView) findViewById(TextViewbids[i]))
+				.setBackgroundColor(Color.parseColor("#BC0001"));									
 				AnimationFactory
 				.flipTransition(
 						(ViewFlipper) findViewById(ViewFlipperids[i]),
@@ -399,5 +410,128 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		}
 
 	}
+	private void PlaySound(int Sound_id) {
+		mplayer = MediaPlayer.create(ThirdGame.this, Sound_id);
+		if (mplayer != null) {
+			mplayer.start();
+		}
+		mplayer.setOnCompletionListener(new OnCompletionListener() {
 
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				mp.release();
+			}
+
+		});
+
+	}
+	Runnable gameOverRun = new Runnable() {
+		@Override
+		public void run() {
+			gameOver();
+
+		}
+	};
+	public void gameOver() {
+		PlaySound(R.raw.app_game_interactive_alert_tone_015);
+		for (int i = 0; i < 36; i++) {
+			findViewById(TextViewids[i]).setClickable(false);
+		}
+
+		Float size = (float) ((((TextView) findViewById(TextViewids[1]))
+				.getWidth()) * 0.75);
+		int reqTextView = 0;
+		char[] messgArray;
+		if (redCount == blueCount)
+			messgArray = new char[]{'G','A','M','E','D','R','A','W'};
+		else if (redCount < blueCount)
+			messgArray = new char[]{'B','L','U','E','W','I','N','S'};
+		else
+			messgArray = new char[]{'R','E','D',' ','W','I','N','S'};
+
+		if (isFlipped[13])
+			reqTextView = TextViewbids[13];
+		else
+			reqTextView = TextViewids[13];
+		((TextView) findViewById(reqTextView)).setText(messgArray[0]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[14])
+			reqTextView = TextViewbids[14];
+		else
+			reqTextView = TextViewids[14];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[1]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[15])
+			reqTextView = TextViewbids[15];
+		else
+			reqTextView = TextViewids[15];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[2]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[16])
+			reqTextView = TextViewbids[16];
+		else
+			reqTextView = TextViewids[16];
+
+
+		if (redCount < blueCount || redCount == blueCount)
+		{
+			((TextView) findViewById(reqTextView)).setText(messgArray[3]+"");
+			((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+			((TextView) findViewById(reqTextView)).setTextSize(
+					TypedValue.COMPLEX_UNIT_PX, size);
+
+		}
+
+		if (isFlipped[19])
+			reqTextView = TextViewbids[19];
+		else
+			reqTextView = TextViewids[19];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[4]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[20])
+			reqTextView = TextViewbids[20];
+		else
+			reqTextView = TextViewids[20];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[5]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[21])
+			reqTextView = TextViewbids[21];
+		else
+			reqTextView = TextViewids[21];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[6]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[22])
+			reqTextView = TextViewbids[22];
+		else
+			reqTextView = TextViewids[22];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[7]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+	}	
 }

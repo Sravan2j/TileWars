@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -27,7 +29,6 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.games.tilewars.R;
 import com.tekle.oss.android.animation.AnimationFactory;
 import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 
@@ -39,7 +40,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 
 	private TextView levelValue;
 	private TextView maxLevelTV;
-		
+
 	private Handler flipHandler = new Handler();
 
 	private Handler swapHandler = new Handler();
@@ -55,6 +56,10 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	boolean gameover = false;
 	Animation animation1=null;
 	Animation animation2=null;
+	boolean switchmp=false;
+	MediaPlayer mediaPlayer;
+	MediaPlayer secondarymediaPlayer;	
+	MediaPlayer mplayer;
 
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14,
 			R.id.tv15, R.id.tv16, R.id.tv21, R.id.tv22, R.id.tv23, R.id.tv24,
@@ -103,7 +108,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	int greenColor = Color.parseColor("#75DB1B");
 	//int greenColor = Color.parseColor("#44B71F");
 	int yellowColor = Color.parseColor("#F3D42C");
-	
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -121,43 +126,46 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		}*/
 		setContentView(R.layout.second_screen);
 		loadSavedPreferences();
-
+		mediaPlayer = MediaPlayer.create(this, R.raw.comedy_slide_whistle_up_001);
+		secondarymediaPlayer = MediaPlayer.create(this, R.raw.comedy_slide_whistle_up_001);		
 		TextView games = (TextView) findViewById(R.id.games);
 		games.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
+				PlaySound(R.raw.menuclick);
 				Intent intent = new Intent(SecondGame.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
 				startActivity(intent);
 			}
 		});
 
-		
+
 		for (int i = 0; i < 36; i++) {
 			final int choiceIndex = i;
 			findViewById(TextViewids[i]).setOnClickListener(
 					new View.OnClickListener() {
 						public void onClick(View v) {
 							if (isFlipped[choiceIndex]) {
+								PlaySound(R.raw.comedy_pop_finger_in_mouth_002);
 								((TextView) findViewById(TextViewbids[choiceIndex]))
-										.setBackgroundColor(yellowColor);
+								.setBackgroundColor(yellowColor);
 								remaining--;
 								flipscount--;
 							} else {
+								PlaySound(R.raw.comedy_twang_or_spring_1);
 								((TextView) findViewById(TextViewbids[choiceIndex]))
-										.setBackgroundColor(Color.RED);
+								.setBackgroundColor(Color.RED);
 								gameover = true;
 								// isFlipped[choiceIndex]=true;
 								// gameOver();
 							}
 							isUserFlipped[choiceIndex] = true;
 							AnimationFactory
-									.flipTransition(
-											(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
-											FlipDirection.LEFT_RIGHT);
+							.flipTransition(
+									(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
+									FlipDirection.LEFT_RIGHT);
 						}
 					});
 		}
@@ -204,16 +212,16 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 				builder.setMessage("Remember where the tiles were shown and tap them all to advance to the next round. Don't be fooled when the tiles start swapping positions. \n\nInstructions:\n- START button starts the game. After the game starts, START button changes to NEXT button.\n- click NEXT button after tapping all the correct tiles, to advance to next level.\n- GAMES button takes you to the game selection screen.")
 				.setTitle("MemoryTile Rules");
 				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-			               // User clicked OK button
-			        	   dialog.dismiss();
-			           }
-			       });				
+					public void onClick(DialogInterface dialog, int id) {
+						// User clicked OK button
+						dialog.dismiss();
+					}
+				});				
 				builder.show();
 			}
 
 		});
-		
+
 	}
 
 	public void Flip() {
@@ -239,7 +247,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 			}
 			isFlipped[random] = true;
 			((TextView) findViewById(TextViewbids[random]))
-					.setBackgroundColor(yellowColor);
+			.setBackgroundColor(yellowColor);
 			AnimationFactory.flipTransition(
 					(ViewFlipper) findViewById(ViewFlipperids[random]),
 					FlipDirection.LEFT_RIGHT);
@@ -262,6 +270,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 				}
 				if (swaps > 0) {
 					// swapAnimation();
+					switchmp=false;
 					swapHandler.postDelayed(swapRun, 1000);
 				} else {
 					for (i = 0; i < 36; i++) {
@@ -313,7 +322,19 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	};
 
 	public void swapAnimation() {
-
+		switchmp=!switchmp;
+		if (switchmp==true){
+			if( mediaPlayer.isPlaying()) {
+				mediaPlayer.stop();			
+			}
+			secondarymediaPlayer.start();
+		}
+		if (switchmp==false){
+			if( secondarymediaPlayer.isPlaying()) {
+				secondarymediaPlayer.stop();			
+			}
+			mediaPlayer.start();
+		}
 		swaps1 = rand.nextInt(36);
 		swaps2 = rand.nextInt(36);
 		while (swaps1 == swaps2) {
@@ -321,21 +342,21 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		}
 
 		((TextView) findViewById(TextViewids[swaps1]))
-				.getLocationInWindow(location1);
+		.getLocationInWindow(location1);
 
 		((TextView) findViewById(TextViewids[swaps2]))
-				.getLocationInWindow(location2);
+		.getLocationInWindow(location2);
 
 		animation1 = new TranslateAnimation(0, location1[0]
 				- location2[0], 0, location1[1] - location2[1]);
-		animation1.setDuration(500);
+		animation1.setDuration(700);
 		animation1.setZAdjustment(Animation.ZORDER_TOP);
 		((TextView) findViewById(TextViewids[swaps2]))
-				.startAnimation(animation1);
+		.startAnimation(animation1);
 
 		animation2 = new TranslateAnimation(0, -location1[0]
 				+ location2[0], 0, -location1[1] + location2[1]);
-		animation2.setDuration(500);
+		animation2.setDuration(700);
 		animation2.setZAdjustment(Animation.ZORDER_BOTTOM);
 
 		animation2.setAnimationListener(new AnimationListener() {
@@ -343,7 +364,11 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 			@Override
 			public void onAnimationStart(Animation animation) {
 				// TODO Auto-generated method stub
-
+				/*if( mediaPlayer.isPlaying()) {
+					mediaPlayer.stop();
+				}
+				mediaPlayer.start();
+				 */
 			}
 
 			@Override
@@ -374,8 +399,11 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 			}
 		});
 
+
+
 		((TextView) findViewById(TextViewids[swaps1]))
-				.startAnimation(animation2);
+		.startAnimation(animation2);
+
 
 	}
 
@@ -393,18 +421,18 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 				if ((i > 12 && i < 17) || (i > 18 && i < 23)) {
 					((TextView) findViewById(TextViewbids[i])).setText("");
 					((TextView) findViewById(TextViewbids[i]))
-							.setBackgroundColor(Color.parseColor("#BC0001"));
+					.setBackgroundColor(Color.parseColor("#BC0001"));
 				}
 				AnimationFactory
-						.flipTransition(
-								(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
-								FlipDirection.LEFT_RIGHT);
+				.flipTransition(
+						(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
+						FlipDirection.LEFT_RIGHT);
 				isUserFlipped[i] = !isUserFlipped[i];
 			} else {
 				if ((i > 12 && i < 17) || (i > 18 && i < 23)) {
 					((TextView) findViewById(TextViewids[i])).setText("");
 					((TextView) findViewById(TextViewids[i]))
-							.setBackgroundColor(Color.parseColor("#808080"));
+					.setBackgroundColor(Color.parseColor("#808080"));
 				}
 			}
 
@@ -436,7 +464,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	}
 
 	public void gameOver() {
-
+		PlaySound(R.raw.app_game_interactive_alert_tone_015);
 		for (int i = 0; i < 36; i++) {
 			findViewById(TextViewids[i]).setClickable(false);
 		}
@@ -532,6 +560,20 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		updateSavedPreferences();
+		if( mediaPlayer!=null && mediaPlayer.isPlaying()) {
+			mediaPlayer.stop();			
+		}
+		if( secondarymediaPlayer!=null && secondarymediaPlayer.isPlaying()) {
+			secondarymediaPlayer.stop();			
+		}
+		/*if( mplayer.isPlaying()) {
+			mplayer.stop();
+			mplayer.release();
+			
+		}*/
+		mediaPlayer.release();
+		secondarymediaPlayer.release();	
+		
 	}
 
 	private void loadSavedPreferences() {
@@ -577,6 +619,26 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 			return super.onOptionsItemSelected(item);
 		}
 
+	}
+
+	private void PlaySound(int Sound_id) {
+		mplayer = MediaPlayer.create(SecondGame.this, Sound_id);
+		if (mplayer != null) {
+			mplayer.start();
+		}
+		mplayer.setOnCompletionListener(new OnCompletionListener() {
+
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				mp.release();
+			}
+
+		});
+	}
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		finish();
 	}
 
 }

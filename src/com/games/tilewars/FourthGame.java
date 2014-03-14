@@ -9,8 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,8 +38,13 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 	private TextView redValue;
 	private TextView blueValue;
 
+	private Handler gameOverHandler = new Handler();
 	private Handler switchHandler = new Handler();
-	private Handler swapHandler = new Handler();	
+	private Handler swapHandler = new Handler();
+	boolean switchmp=false;
+	MediaPlayer mplayer;
+	MediaPlayer mediaPlayer;
+	MediaPlayer secondarymediaPlayer;	
 
 	int currentIndex = 0;
 	int cnt = 0;
@@ -57,6 +65,7 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 	int neighbour7 = -1;
 	int neighbour8 = -1;
 
+	int remaining = 36;
 	int level = 0;
 	int swaps = 0;
 	int flipscount = 0;
@@ -103,6 +112,7 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 	Random rand = new Random();
 	Animation animation1=null;
 	Animation animation2=null;
+	int greenColor = Color.parseColor("#75DB1B");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,14 +129,15 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 			setContentView(R.layout.fourth_screen);
 		}*/
 		setContentView(R.layout.fourth_screen);
-		
-		
+
+		mediaPlayer = MediaPlayer.create(this, R.raw.comedy_slide_whistle_up_001);
+		secondarymediaPlayer = MediaPlayer.create(this, R.raw.comedy_slide_whistle_up_001);
 		TextView games = (TextView) findViewById(R.id.games);
 		games.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
+				PlaySound(R.raw.menuclick);
 				Intent intent = new Intent(FourthGame.this, MainActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
@@ -140,7 +151,8 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 			findViewById(TextViewids[i]).setOnClickListener(
 					new View.OnClickListener() {
 						public void onClick(View v) {
-
+							PlaySound(R.raw.comedy_pop_finger_in_mouth_002);
+							remaining--;
 							for (int k = 0; k < 36; k++) {
 								((TextView) findViewById(TextViewids[k]))
 								.setClickable(false);
@@ -255,7 +267,7 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 							else
 							{								
 								switchHandler.postDelayed(switchRun, 200);			
-							}
+							}							
 
 						}
 					});
@@ -471,12 +483,31 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 					redValue.setTextColor(Color.GRAY);
 				}
 			}
-
+			if(remaining==0)
+			{
+				gameOverHandler.postDelayed(gameOverRun, 600);
+				//gameOver();
+			}
 		}
 	};
 
 
 	public void swapAnimation() {
+
+		switchmp=!switchmp;
+		if (switchmp==true){
+			if( mediaPlayer.isPlaying()) {
+				mediaPlayer.stop();			
+			}
+			secondarymediaPlayer.start();
+		}
+		if (switchmp==false){
+			if( secondarymediaPlayer.isPlaying()) {
+				secondarymediaPlayer.stop();			
+			}
+			mediaPlayer.start();
+		}
+
 		swaps1=currentIndex;		
 		swaps2 = rand.nextInt(36);
 		while (swaps1 == swaps2 || cardColor[swaps2]!=player) {
@@ -549,6 +580,7 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 	public void resetGame() {
 		swapHandler.removeCallbacks(swapRun);
 		switchHandler.removeCallbacks(switchRun);
+		remaining = 36;
 		redCount=0;
 		blueCount=0;
 		chances = 1;
@@ -558,6 +590,10 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 			//final int choiceIndex = i;
 			((TextView) findViewById(TextViewids[i]))
 			.setBackgroundColor(Color.parseColor("#808080"));
+			if ((i > 12 && i < 17) || (i > 18 && i < 23)) {
+				((TextView) findViewById(TextViewbids[i])).setText("");
+				((TextView) findViewById(TextViewids[i])).setText("");
+			}
 
 			if (isFlipped[i]) {
 
@@ -612,6 +648,156 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 			return super.onOptionsItemSelected(item);
 		}
 
+	}
+
+	private void PlaySound(int Sound_id) {
+		mplayer = MediaPlayer.create(FourthGame.this, Sound_id);
+		if (mplayer != null) {
+			mplayer.start();
+		}
+		mplayer.setOnCompletionListener(new OnCompletionListener() {
+
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				mp.release();
+			}
+
+		});
+
+	}
+	Runnable gameOverRun = new Runnable() {
+		@Override
+		public void run() {
+			gameOver();
+
+		}
+	};
+	public void gameOver() {
+		PlaySound(R.raw.app_game_interactive_alert_tone_015);
+		for (int i = 0; i < 36; i++) {
+			findViewById(TextViewids[i]).setClickable(false);
+		}
+
+		Float size = (float) ((((TextView) findViewById(TextViewids[1]))
+				.getWidth()) * 0.75);
+		int reqTextView = 0;
+		char[] messgArray;
+		if (redCount == blueCount)
+			messgArray = new char[]{'G','A','M','E','D','R','A','W'};
+		else if (redCount < blueCount)
+			messgArray = new char[]{'B','L','U','E','W','I','N','S'};
+		else
+			messgArray = new char[]{'R','E','D',' ','W','I','N','S'};
+
+		if (isFlipped[13])
+			reqTextView = TextViewbids[13];
+		else
+			reqTextView = TextViewids[13];
+		((TextView) findViewById(reqTextView)).setText(messgArray[0]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[14])
+			reqTextView = TextViewbids[14];
+		else
+			reqTextView = TextViewids[14];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[1]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[15])
+			reqTextView = TextViewbids[15];
+		else
+			reqTextView = TextViewids[15];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[2]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[16])
+			reqTextView = TextViewbids[16];
+		else
+			reqTextView = TextViewids[16];
+
+
+		if (redCount < blueCount || redCount == blueCount)
+		{
+			((TextView) findViewById(reqTextView)).setText(messgArray[3]+"");
+			((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+			((TextView) findViewById(reqTextView)).setTextSize(
+					TypedValue.COMPLEX_UNIT_PX, size);
+
+		}
+
+		if (isFlipped[19])
+			reqTextView = TextViewbids[19];
+		else
+			reqTextView = TextViewids[19];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[4]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[20])
+			reqTextView = TextViewbids[20];
+		else
+			reqTextView = TextViewids[20];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[5]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[21])
+			reqTextView = TextViewbids[21];
+		else
+			reqTextView = TextViewids[21];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[6]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+		if (isFlipped[22])
+			reqTextView = TextViewbids[22];
+		else
+			reqTextView = TextViewids[22];
+
+		((TextView) findViewById(reqTextView)).setText(messgArray[7]+"");
+		((TextView) findViewById(reqTextView)).setBackgroundColor(greenColor);
+		((TextView) findViewById(reqTextView)).setTextSize(
+				TypedValue.COMPLEX_UNIT_PX, size);
+
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if( mediaPlayer!=null && mediaPlayer.isPlaying()) {
+			mediaPlayer.stop();			
+		}
+		if( secondarymediaPlayer!=null && secondarymediaPlayer.isPlaying()) {
+			secondarymediaPlayer.stop();			
+		}
+		/*if( mplayer.isPlaying()) {
+			mplayer.stop();
+			mplayer.release();
+
+		}*/
+		mediaPlayer.release();
+		secondarymediaPlayer.release();	
+
+	}
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		finish();
 	}
 
 }
