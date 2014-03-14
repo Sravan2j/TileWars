@@ -34,12 +34,10 @@ import com.tekle.oss.android.animation.AnimationFactory.FlipDirection;
 @SuppressLint({ "ShowToast", "NewApi" })
 public class FirstGame extends Activity implements FlipCompleteListener {
 	private static final int ABOUT_MENUOPTION_ID = Menu.FIRST + 11;
-	private TextView startButton;	
+	private TextView startButton;
 	private TextView rulesButton;
-
 	private TextView timerValue;
 	private TextView maxTimerTV;
-
 	private long startTime = 0L;
 	long timeInMilliseconds = 0L;
 	long timeSwapBuff = 0L;
@@ -47,7 +45,7 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 	int sleepValue = 600;
 	// int maxCells=1;
 	// int userClick=0;
-	int count = 0;
+	volatile int count = 0;
 	String maxTimeValue = "";
 	String currentGameTimeValue = "";
 	int maxTimeMillisVal = 0;
@@ -58,7 +56,7 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 	private Handler flipHandler = new Handler();
 
 	int greenColor = Color.parseColor("#75DB1B");
-	boolean flag = false;
+	volatile boolean flag = false;
 
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14,
 			R.id.tv15, R.id.tv16, R.id.tv21, R.id.tv22, R.id.tv23, R.id.tv24,
@@ -129,23 +127,24 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 			findViewById(TextViewbids[i]).setOnClickListener(
 					new View.OnClickListener() {
 						public void onClick(View v) {
+							// update(choiceIndex, -1);
+							if (isFlipped[choiceIndex] == true)
+								AnimationFactory
+										.flipTransition(
+												(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
+												FlipDirection.LEFT_RIGHT);
+
+							new Thread(new Runnable() {
+								public void run() {
+									update(choiceIndex, true, -1);
+								}
+							}).start();
 							PlaySound(R.raw.comedy_pop_finger_in_mouth_002);
-							update(choiceIndex, -1);
-							/*new Thread(new Runnable() {
-							    public void run() {
-							    	update(choiceIndex, -1);
-							    }
-							}).start();*/
-							AnimationFactory
-									.flipTransition(
-											(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
-											FlipDirection.LEFT_RIGHT);
 							// count--;
 							/*
 							 * userClick++; if(userClick==50) {maxCells++;
 							 * userClick=0;}
 							 */
-
 						}
 					});
 		}
@@ -183,7 +182,6 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 
 			public void onClick(View view) {
 				// new FlipTask().execute();
-
 				if (flag) {
 
 					customHandler.removeCallbacks(updateTimerThread);
@@ -222,13 +220,13 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 			while (isFlipped[random]) {
 				random = rand.nextInt(36);
 			}
-			update(random, 1);
-			/*final int r2=random;
+			// update(random, 1);
+			final int var = random;
 			new Thread(new Runnable() {
-			    public void run() {
-			    	update(r2, 1);
-			    }
-			}).start();*/
+				public void run() {
+					update(var, false, 1);
+				}
+			}).start();
 			AnimationFactory.flipTransition(
 					(ViewFlipper) findViewById(ViewFlipperids[random]),
 					FlipDirection.LEFT_RIGHT);
@@ -237,8 +235,7 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 			// }
 			if (sleepValue > 340)
 				sleepValue -= 5;
-			// else if (sleepValue<341 && sleepValue>50) sleepValue-=2; //need
-			// to uncomment this to make game play hard
+			// else if (sleepValue<341 && sleepValue>50) sleepValue-=2; //need to uncomment this to make game play hard
 			Log.i("SleepValue", sleepValue + "");
 			if (count < 10)
 				flipHandler.postDelayed(flipRun, sleepValue);
@@ -281,17 +278,19 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 			findViewById(TextViewbids[i]).setOnClickListener(
 					new View.OnClickListener() {
 						public void onClick(View v) {
-							PlaySound(R.raw.comedy_pop_finger_in_mouth_002);
-							update(choiceIndex, -1);
-							/*new Thread(new Runnable() {
-							    public void run() {
-							    	update(choiceIndex, -1);
-							    }
-							}).start();							*/
-							AnimationFactory
-									.flipTransition(
-											(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
-											FlipDirection.LEFT_RIGHT);
+							// update(choiceIndex, -1);
+							final int var = choiceIndex;
+							if (isFlipped[choiceIndex] == true)
+								AnimationFactory
+										.flipTransition(
+												(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
+												FlipDirection.LEFT_RIGHT);
+							new Thread(new Runnable() {
+								public void run() {
+									update(var, true, -1);
+								}
+							}).start();
+							PlaySound(R.raw.comedy_pop_finger_in_mouth_002);							
 							// count--;
 							/*
 							 * userClick++; if(userClick==50) {maxCells++;
@@ -304,11 +303,11 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 		}
 	}
 
-	public synchronized void update(int index, int num) {
-		isFlipped[index] = !isFlipped[index];
-		count += num;
-		Log.i("Track:",count+"");
-		//if (count==10) gameOver();
+	public synchronized void update(int index, boolean flag, int num) {
+		if (isFlipped[index] == flag) {
+			count += num;
+			isFlipped[index] = !isFlipped[index];
+		}
 	}
 
 	private Runnable updateTimerThread = new Runnable() {
@@ -342,12 +341,18 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 	}
 
 	public void gameOver() {
-		PlaySound(R.raw.app_game_interactive_alert_tone_015);
+
 		timeSwapBuff += timeInMilliseconds;
 		customHandler.removeCallbacks(updateTimerThread);
-
+		flipHandler.removeCallbacks(flipRun);
+		PlaySound(R.raw.app_game_interactive_alert_tone_015);
+		ViewFlipper vf;
 		for (int i = 0; i < 36; i++) {
 			findViewById(TextViewbids[i]).setOnClickListener(null);
+			vf = (ViewFlipper) findViewById(ViewFlipperids[i]); // to correct the isflipped flags, that are skipped getting 
+																// set at the end of game (i.e., when gameover() is called)
+			if (vf.getDisplayedChild() == 1)
+				isFlipped[i] = true;
 		}
 
 		Float size = (float) ((((TextView) findViewById(TextViewids[1]))
@@ -520,6 +525,7 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 
 		});
 	}
+
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
