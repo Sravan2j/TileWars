@@ -26,10 +26,12 @@ import android.widget.TextView;
 public class MainActivity extends Activity implements OnClickListener {
 
 	@SuppressWarnings("unused")
+	GlobalClass globalVariable;
 	private static final String TAG = "demo.layout.transition.MainActivity";
 	private static final int ABOUT_MENUOPTION_ID = Menu.FIRST + 11;
 	private View viewvar= null;
 	LinearLayout frm_linear_00 = null;
+	TextView soundIcon;
 	TextView t1 = null;
 	TextView t2 = null;
 	TextView t3 = null;
@@ -49,7 +51,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	int Gameid=0;
 	private Handler animOverHandler = new Handler();
 	public static Animator.AnimatorListener sAnimatorListener2;
-
+	boolean sound=true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,35 @@ public class MainActivity extends Activity implements OnClickListener {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
+
+		globalVariable = (GlobalClass) getApplicationContext();
+		sound=globalVariable.soundIsOn();
+		soundIcon = (TextView) findViewById(R.id.sound);
+		if(sound==false)
+		{
+			soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+		}
+		soundIcon.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(sound==false) 
+				{					
+					soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumeon,0,0);
+					sound=true;
+					globalVariable.turnInSound(true);
+				}
+				else
+				{
+					PlaySound(R.raw.menuclick);
+					soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+					sound=false;
+					globalVariable.turnInSound(false);
+				}
+
+			}
+		});
+
 
 		setOnClickListenerForChild(R.id.frm_linear_00, true, true);
 		setOnClickListenerForChild(R.id.frm_linear_01, true, true);
@@ -103,11 +134,11 @@ public class MainActivity extends Activity implements OnClickListener {
 					builder.setMessage("Please select a TILE among four tiles. Then Click 'Play'.")
 					.setTitle("Select a Game");
 					builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-				           public void onClick(DialogInterface dialog, int id) {
-				               // User clicked OK button
-				        	   dialog.dismiss();
-				           }
-				       });				
+						public void onClick(DialogInterface dialog, int id) {
+							// User clicked OK button
+							dialog.dismiss();
+						}
+					});				
 					builder.show();
 				}
 				if(Gameid==1){
@@ -147,6 +178,22 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		sound=globalVariable.soundIsOn();
+		if(sound==false)
+		{
+			soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+		}
+		else
+		{
+			soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumeon,0,0);
+		}
+
+	}
+
 	private void setOnClickListenerForChild(int id, boolean enable, boolean needScroll) {
 		ViewGroup viewGroup = (ViewGroup)findViewById(id);
 
@@ -165,7 +212,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		if ((view instanceof TextView) && (!view.equals(viewvar)))  {
-			
+
 			final TextView textView = (TextView) view;
 			if (viewvar!=null)
 			{
@@ -250,9 +297,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	Runnable animOver = new Runnable() {
 		@Override
 		public void run() {
-			
+
 			if(Gameid==1)
-			gameId.setText("SpeedTile Game");
+				gameId.setText("SpeedTile Game");
 			if(Gameid==2){
 				PlaySound(R.raw.tileclick);		
 				gameId.setText("MemoryTile Game");				
@@ -288,19 +335,20 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	}
 	private void PlaySound(int Sound_id) {
-		mplayer = MediaPlayer.create(MainActivity.this, Sound_id);
-		if (mplayer != null) {
-			mplayer.start();
-		}
-		mplayer.setOnCompletionListener(new OnCompletionListener() {
-
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				mp.release();
+		if(sound){
+			mplayer = MediaPlayer.create(MainActivity.this, Sound_id);
+			if (mplayer != null) {
+				mplayer.start();
 			}
+			mplayer.setOnCompletionListener(new OnCompletionListener() {
 
-		});
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					mp.release();
+				}
 
+			});
+		}
 	}
 
 }

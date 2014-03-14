@@ -68,7 +68,8 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 	int greenColor = Color.parseColor("#75DB1B");
 	//boolean computer = true;
 	boolean gameover = false;
-
+	boolean sound=true;
+	
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14,
 			R.id.tv15, R.id.tv16, R.id.tv21, R.id.tv22, R.id.tv23, R.id.tv24,
 			R.id.tv25, R.id.tv26, R.id.tv31, R.id.tv32, R.id.tv33, R.id.tv34,
@@ -128,6 +129,35 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 		}*/
 		setContentView(R.layout.third_screen);
 
+		final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+		sound=globalVariable.soundIsOn();
+		final TextView soundIcon = (TextView) findViewById(R.id.sound);
+		if(sound==false)
+		{
+			soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+		}
+		soundIcon.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(sound==false) 
+				{
+					soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumeon,0,0);
+					sound=true;
+					globalVariable.turnInSound(true);
+				}
+				else
+				{
+					PlaySound(R.raw.menuclick);
+					soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+					sound=false;
+					globalVariable.turnInSound(false);
+				}
+
+			}
+		});
+
+		
 		TextView games = (TextView) findViewById(R.id.games);
 		games.setOnClickListener(new View.OnClickListener() {
 
@@ -411,19 +441,20 @@ public class ThirdGame extends Activity implements FlipCompleteListener {
 
 	}
 	private void PlaySound(int Sound_id) {
-		mplayer = MediaPlayer.create(ThirdGame.this, Sound_id);
-		if (mplayer != null) {
-			mplayer.start();
-		}
-		mplayer.setOnCompletionListener(new OnCompletionListener() {
-
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				mp.release();
+		if(sound) {
+			mplayer = MediaPlayer.create(ThirdGame.this, Sound_id);
+			if (mplayer != null) {
+				mplayer.start();
 			}
+			mplayer.setOnCompletionListener(new OnCompletionListener() {
 
-		});
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					mp.release();
+				}
 
+			});
+		}
 	}
 	Runnable gameOverRun = new Runnable() {
 		@Override

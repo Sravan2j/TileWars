@@ -218,6 +218,16 @@
             </TextView>
 
             <TextView
+                android:id="@+id/sound"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:clickable="true"
+                android:drawableTop="@drawable/volumeon"
+                android:gravity="center_horizontal" >
+            </TextView>
+
+            <TextView
                 android:id="@+id/games"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

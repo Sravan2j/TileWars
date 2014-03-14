@@ -9,9 +9,9 @@
         android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:gravity="center_vertical"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
         android:stretchColumns="1" >
 
         <TableRow
@@ -23,13 +23,13 @@
                 android:id="@+id/gameid"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"                
+                android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="Select a Game"
-                android:typeface="serif"
-                android:textStyle="bold|italic"
+                android:textColor="#001082"
                 android:textSize="30sp"
-                android:textColor="#001082" >
+                android:textStyle="bold|italic"
+                android:typeface="serif" >
             </TextView>
         </TableRow>
     </TableLayout>
@@ -39,15 +39,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tableLayout1"
-         
         android:orientation="vertical" >
 
         <LinearLayout
             android:id="@+id/frm_linear_00"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
+            android:layout_gravity="center_horizontal"
             android:animateLayoutChanges="true"
-            android:layout_gravity="center_horizontal"            
             android:padding="6dp"
             android:visibility="gone" >
 
@@ -166,12 +165,13 @@
                 android:layout_height="72dp"
                 android:visibility="gone" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/frm_linear_03"
             android:layout_width="wrap_content"
             android:layout_height="90dp"
-            android:layout_gravity="center_horizontal"     
-            android:animateLayoutChanges="true"       
+            android:layout_gravity="center_horizontal"
+            android:animateLayoutChanges="true"
             android:padding="6dp"
             android:visibility="gone" >
 
@@ -190,7 +190,6 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp" />
         </LinearLayout>
-        
     </com.games.tilewars.DemoLinearLayout>
 
     <TableLayout
@@ -203,21 +202,29 @@
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-             >
+            android:layout_height="wrap_content" >
 
             <TextView
                 android:id="@+id/play"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                	
+                android:clickable="true"
                 android:drawableTop="@drawable/playbgbrown"
                 android:gravity="center_horizontal"
+                android:text="Play"
                 android:textColor="#808080"
+                android:textSize="20sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/sound"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
                 android:clickable="true"
-                android:textSize="20sp"
-                android:text="Play" >
+                android:drawableTop="@drawable/volumeon"
+                android:gravity="center_horizontal" >
             </TextView>
 
             <TextView
@@ -225,12 +232,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/gearbg"                
-                android:gravity="center_horizontal"
-                android:textColor="#001082"
                 android:clickable="true"
-                android:textSize="20sp"
-                android:text="Games" >
+                android:drawableTop="@drawable/gearbg"
+                android:gravity="center_horizontal"
+                android:text="Games"
+                android:textColor="#001082"
+                android:textSize="20sp" >
             </TextView>
         </TableRow>
     </TableLayout>

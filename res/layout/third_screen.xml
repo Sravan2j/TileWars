@@ -1098,13 +1098,10 @@
             android:layout_weight="1" />
     </com.games.tilewars.SquareLayout>
 
-
-
-
     <TableLayout
         android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"        
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:paddingBottom="4dp"
@@ -1121,12 +1118,12 @@
                 android:id="@+id/blueValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"                               
+                android:gravity="center_horizontal"
                 android:text="@string/blueVal"
-                android:textStyle="bold"
-                android:textColor="#001082" />
+                android:textColor="#001082"
+                android:textStyle="bold" />
         </TableRow>
-        
+
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="match_parent"
@@ -1137,11 +1134,11 @@
             <TextView
                 android:id="@+id/redValue"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
-                android:gravity="center_horizontal"                         
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:text="@string/redVal"
-                android:textStyle="bold"
-                android:textColor="#001082" />
+                android:textColor="#001082"
+                android:textStyle="bold" />
         </TableRow>
 
         <TableRow
@@ -1193,6 +1190,16 @@
             </TextView>
 
             <TextView
+                android:id="@+id/sound"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:clickable="true"
+                android:drawableTop="@drawable/volumeon"
+                android:gravity="center_horizontal" >
+            </TextView>
+
+            <TextView
                 android:id="@+id/games"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -1205,4 +1212,5 @@
             </TextView>
         </TableRow>
     </TableLayout>
+
 </RelativeLayout>

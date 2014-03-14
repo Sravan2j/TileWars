@@ -51,6 +51,7 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 	int maxTimeMillisVal = 0;
 	int currTimeMillisVal = 0;
 	MediaPlayer mplayer;
+	boolean sound=true;
 
 	private Handler customHandler = new Handler();
 	private Handler flipHandler = new Handler();
@@ -106,6 +107,34 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 		// }
 
 		loadSavedPreferences();
+		final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+		sound=globalVariable.soundIsOn();
+		final TextView soundIcon = (TextView) findViewById(R.id.sound);
+		if(sound==false)
+		{
+			soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+		}
+		soundIcon.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(sound==false) 
+				{
+					soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumeon,0,0);
+					sound=true;
+					globalVariable.turnInSound(true);
+				}
+				else
+				{
+					PlaySound(R.raw.menuclick);
+					soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+					sound=false;
+					globalVariable.turnInSound(false);
+				}
+
+			}
+		});
+
 
 		TextView games = (TextView) findViewById(R.id.games);
 		games.setOnClickListener(new View.OnClickListener() {
@@ -130,9 +159,9 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 							// update(choiceIndex, -1);
 							if (isFlipped[choiceIndex] == true)
 								AnimationFactory
-										.flipTransition(
-												(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
-												FlipDirection.LEFT_RIGHT);
+								.flipTransition(
+										(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
+										FlipDirection.LEFT_RIGHT);
 
 							new Thread(new Runnable() {
 								public void run() {
@@ -168,11 +197,11 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 						.setTitle("SpeedTile Rules");
 				builder.setPositiveButton("Ok",
 						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								// User clicked OK button
-								dialog.dismiss();
-							}
-						});
+					public void onClick(DialogInterface dialog, int id) {
+						// User clicked OK button
+						dialog.dismiss();
+					}
+				});
 				builder.show();
 			}
 
@@ -260,18 +289,18 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 				if ((i > 12 && i < 17) || (i > 18 && i < 23)) {
 					((TextView) findViewById(TextViewbids[i])).setText("");
 					((TextView) findViewById(TextViewbids[i]))
-							.setBackgroundColor(Color.parseColor("#BC0001"));
+					.setBackgroundColor(Color.parseColor("#BC0001"));
 				}
 				AnimationFactory
-						.flipTransition(
-								(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
-								FlipDirection.LEFT_RIGHT);
+				.flipTransition(
+						(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
+						FlipDirection.LEFT_RIGHT);
 				isFlipped[i] = !isFlipped[i];
 			} else {
 				if ((i > 12 && i < 17) || (i > 18 && i < 23)) {
 					((TextView) findViewById(TextViewids[i])).setText("");
 					((TextView) findViewById(TextViewids[i]))
-							.setBackgroundColor(Color.parseColor("#808080"));
+					.setBackgroundColor(Color.parseColor("#808080"));
 				}
 			}
 
@@ -282,9 +311,9 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 							final int var = choiceIndex;
 							if (isFlipped[choiceIndex] == true)
 								AnimationFactory
-										.flipTransition(
-												(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
-												FlipDirection.LEFT_RIGHT);
+								.flipTransition(
+										(ViewFlipper) findViewById(ViewFlipperids[choiceIndex]),
+										FlipDirection.LEFT_RIGHT);
 							new Thread(new Runnable() {
 								public void run() {
 									update(var, true, -1);
@@ -350,7 +379,7 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 		for (int i = 0; i < 36; i++) {
 			findViewById(TextViewbids[i]).setOnClickListener(null);
 			vf = (ViewFlipper) findViewById(ViewFlipperids[i]); // to correct the isflipped flags, that are skipped getting 
-																// set at the end of game (i.e., when gameover() is called)
+			// set at the end of game (i.e., when gameover() is called)
 			if (vf.getDisplayedChild() == 1)
 				isFlipped[i] = true;
 		}
@@ -512,18 +541,20 @@ public class FirstGame extends Activity implements FlipCompleteListener {
 	}
 
 	private void PlaySound(int Sound_id) {
-		mplayer = MediaPlayer.create(FirstGame.this, Sound_id);
-		if (mplayer != null) {
-			mplayer.start();
-		}
-		mplayer.setOnCompletionListener(new OnCompletionListener() {
-
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				mp.release();
+		if(sound) {
+			mplayer = MediaPlayer.create(FirstGame.this, Sound_id);
+			if (mplayer != null) {
+				mplayer.start();
 			}
+			mplayer.setOnCompletionListener(new OnCompletionListener() {
 
-		});
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					mp.release();
+				}
+
+			});
+		}
 	}
 
 	@Override

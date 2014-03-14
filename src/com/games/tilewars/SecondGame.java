@@ -60,6 +60,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	MediaPlayer mediaPlayer;
 	MediaPlayer secondarymediaPlayer;	
 	MediaPlayer mplayer;
+	boolean sound=true;
 
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14,
 			R.id.tv15, R.id.tv16, R.id.tv21, R.id.tv22, R.id.tv23, R.id.tv24,
@@ -127,7 +128,36 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		setContentView(R.layout.second_screen);
 		loadSavedPreferences();
 		mediaPlayer = MediaPlayer.create(this, R.raw.comedy_slide_whistle_up_001);
-		secondarymediaPlayer = MediaPlayer.create(this, R.raw.comedy_slide_whistle_up_001);		
+		secondarymediaPlayer = MediaPlayer.create(this, R.raw.comedy_slide_whistle_up_001);
+
+		final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+		sound=globalVariable.soundIsOn();
+		final TextView soundIcon = (TextView) findViewById(R.id.sound);
+		if(sound==false)
+		{
+			soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+		}
+		soundIcon.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(sound==false) 
+				{
+					soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumeon,0,0);
+					sound=true;
+					globalVariable.turnInSound(true);
+				}
+				else
+				{
+					PlaySound(R.raw.menuclick);
+					soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+					sound=false;
+					globalVariable.turnInSound(false);
+				}
+
+			}
+		});
+
 		TextView games = (TextView) findViewById(R.id.games);
 		games.setOnClickListener(new View.OnClickListener() {
 
@@ -322,18 +352,21 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	};
 
 	public void swapAnimation() {
-		switchmp=!switchmp;
-		if (switchmp==true){
-			if( mediaPlayer.isPlaying()) {
-				mediaPlayer.stop();			
+		if(sound)
+		{
+			switchmp=!switchmp;
+			if (switchmp==true){
+				if( mediaPlayer.isPlaying()) {
+					mediaPlayer.stop();			
+				}
+				secondarymediaPlayer.start();
 			}
-			secondarymediaPlayer.start();
-		}
-		if (switchmp==false){
-			if( secondarymediaPlayer.isPlaying()) {
-				secondarymediaPlayer.stop();			
+			if (switchmp==false){
+				if( secondarymediaPlayer.isPlaying()) {
+					secondarymediaPlayer.stop();			
+				}
+				mediaPlayer.start();
 			}
-			mediaPlayer.start();
 		}
 		swaps1 = rand.nextInt(36);
 		swaps2 = rand.nextInt(36);
@@ -569,11 +602,11 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		/*if( mplayer.isPlaying()) {
 			mplayer.stop();
 			mplayer.release();
-			
+
 		}*/
 		mediaPlayer.release();
 		secondarymediaPlayer.release();	
-		
+
 	}
 
 	private void loadSavedPreferences() {
@@ -622,18 +655,20 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	}
 
 	private void PlaySound(int Sound_id) {
-		mplayer = MediaPlayer.create(SecondGame.this, Sound_id);
-		if (mplayer != null) {
-			mplayer.start();
-		}
-		mplayer.setOnCompletionListener(new OnCompletionListener() {
-
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				mp.release();
+		if(sound) {
+			mplayer = MediaPlayer.create(SecondGame.this, Sound_id);
+			if (mplayer != null) {
+				mplayer.start();
 			}
+			mplayer.setOnCompletionListener(new OnCompletionListener() {
 
-		});
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					mp.release();
+				}
+
+			});
+		}
 	}
 	public void onBackPressed() {
 		// TODO Auto-generated method stub

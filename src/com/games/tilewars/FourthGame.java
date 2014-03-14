@@ -69,6 +69,7 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 	int level = 0;
 	int swaps = 0;
 	int flipscount = 0;
+	boolean sound=true;
 
 	int[] TextViewids = { R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14,
 			R.id.tv15, R.id.tv16, R.id.tv21, R.id.tv22, R.id.tv23, R.id.tv24,
@@ -132,6 +133,36 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 
 		mediaPlayer = MediaPlayer.create(this, R.raw.comedy_slide_whistle_up_001);
 		secondarymediaPlayer = MediaPlayer.create(this, R.raw.comedy_slide_whistle_up_001);
+
+		final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+		sound=globalVariable.soundIsOn();
+		final TextView soundIcon = (TextView) findViewById(R.id.sound);
+		if(sound==false)
+		{
+			soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+		}
+		soundIcon.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(sound==false) 
+				{
+					soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumeon,0,0);
+					sound=true;
+					globalVariable.turnInSound(true);
+				}
+				else
+				{
+					PlaySound(R.raw.menuclick);
+					soundIcon.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.volumemuted,0,0);
+					globalVariable.turnInSound(false);
+					sound=false;
+				}
+
+			}
+		});
+
+
 		TextView games = (TextView) findViewById(R.id.games);
 		games.setOnClickListener(new View.OnClickListener() {
 
@@ -493,21 +524,21 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 
 
 	public void swapAnimation() {
-
-		switchmp=!switchmp;
-		if (switchmp==true){
-			if( mediaPlayer.isPlaying()) {
-				mediaPlayer.stop();			
+		if(sound){
+			switchmp=!switchmp;
+			if (switchmp==true){
+				if( mediaPlayer.isPlaying()) {
+					mediaPlayer.stop();			
+				}
+				secondarymediaPlayer.start();
 			}
-			secondarymediaPlayer.start();
-		}
-		if (switchmp==false){
-			if( secondarymediaPlayer.isPlaying()) {
-				secondarymediaPlayer.stop();			
+			if (switchmp==false){
+				if( secondarymediaPlayer.isPlaying()) {
+					secondarymediaPlayer.stop();			
+				}
+				mediaPlayer.start();
 			}
-			mediaPlayer.start();
 		}
-
 		swaps1=currentIndex;		
 		swaps2 = rand.nextInt(36);
 		while (swaps1 == swaps2 || cardColor[swaps2]!=player) {
@@ -651,19 +682,20 @@ public class FourthGame extends Activity implements FlipCompleteListener {
 	}
 
 	private void PlaySound(int Sound_id) {
-		mplayer = MediaPlayer.create(FourthGame.this, Sound_id);
-		if (mplayer != null) {
-			mplayer.start();
-		}
-		mplayer.setOnCompletionListener(new OnCompletionListener() {
-
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				mp.release();
+		if(sound) {
+			mplayer = MediaPlayer.create(FourthGame.this, Sound_id);
+			if (mplayer != null) {
+				mplayer.start();
 			}
+			mplayer.setOnCompletionListener(new OnCompletionListener() {
 
-		});
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					mp.release();
+				}
 
+			});
+		}
 	}
 	Runnable gameOverRun = new Runnable() {
 		@Override
