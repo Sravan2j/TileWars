@@ -54,6 +54,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	int userClick = 0;
 	boolean computer = true;
 	boolean gameover = false;
+	boolean gameovercalled = false;
 	Animation animation1=null;
 	Animation animation2=null;
 	boolean switchmp=false;
@@ -184,10 +185,14 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 								remaining--;
 								flipscount--;
 							} else {
-								PlaySound(R.raw.comedy_twang_or_spring_1);
+
 								((TextView) findViewById(TextViewbids[choiceIndex]))
 								.setBackgroundColor(Color.RED);
-								gameover = true;
+								PlaySound(R.raw.comedy_twang_or_spring_1);
+								gameover = true;								
+								for (int i = 0; i < 36; i++) {
+									findViewById(TextViewids[i]).setClickable(false);									
+								}
 								// isFlipped[choiceIndex]=true;
 								// gameOver();
 							}
@@ -216,8 +221,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 
 			public void onClick(View view) {
 
-				if (gameover) {
-					Log.i("enterd reset", "enrteer resret");
+				if (gameover) {					
 					nextButton.setClickable(false);
 					resetGame();
 					levelValue.setText("Levels Completed : " + level);
@@ -447,6 +451,7 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 		swaps = 0;
 		computer = true;
 		gameover = false;
+		gameovercalled = false;
 
 		for (int i = 0; i < 36; i++) {
 			final int choiceIndex = i;
@@ -477,7 +482,24 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	public void flipOutComplete() {
 
 		if (gameover == true) {
-			gameOverHandler.postDelayed(gameOverRun, 600);
+
+			ViewFlipper vf;
+			for (int i = 0; i < 36; i++) {
+				findViewById(TextViewids[i]).setClickable(false);
+				vf = (ViewFlipper) findViewById(ViewFlipperids[i]); // to correct the isflipped flags, that are skipped getting 
+				// set at the end of game (i.e., when gameover() is called)
+				if (vf.getDisplayedChild() == 1)
+					isUserFlipped[i] = true;
+				else
+					isUserFlipped[i] = false;
+			}
+
+			if( gameovercalled == false) //To stop the recursive calls to gameover sound. 
+										//This scenario happens when user clicks wrong tiles at very high speed. 
+			{
+				gameovercalled = true;
+				gameOverHandler.postDelayed(gameOverRun, 600);
+			}			
 		}
 		if (computer) {
 			flipscount--;
@@ -497,10 +519,8 @@ public class SecondGame extends Activity implements FlipCompleteListener {
 	}
 
 	public void gameOver() {
+
 		PlaySound(R.raw.app_game_interactive_alert_tone_015);
-		for (int i = 0; i < 36; i++) {
-			findViewById(TextViewids[i]).setClickable(false);
-		}
 
 		Float size = (float) ((((TextView) findViewById(TextViewids[1]))
 				.getWidth()) * 0.75);
